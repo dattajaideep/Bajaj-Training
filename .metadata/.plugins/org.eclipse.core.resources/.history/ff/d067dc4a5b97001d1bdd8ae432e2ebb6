@@ -26,6 +26,4 @@ public class customer {
 		this.account = account;
 	}
 	
-	// hello world
-	
 }
