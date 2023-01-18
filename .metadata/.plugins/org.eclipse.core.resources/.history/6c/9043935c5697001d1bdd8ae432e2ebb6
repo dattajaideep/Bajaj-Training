@@ -1,0 +1,38 @@
+package com.javareruns.basics.Day1;
+import java.util.*;
+class Employee {
+    int eId;
+    String name;
+    double salary;
+    String company;
+    static int count;
+
+    Employee(int id, String n, double s, String c) {
+        eId = id;
+        name = n;
+        salary = s;
+        company = c;
+        count++;
+    }
+
+    void display() {
+        System.out.println("Employee ID: " + eId);
+        System.out.println("Name: " + name);
+        System.out.println("Salary: " + salary);
+        System.out.println("Company: " + company);
+    }
+
+    public static void main(String[] args) {
+    	Scanner sc=new Scanner(System.in);
+        Employee e1 = new Employee(sc.nextInt(),sc.next(), sc.nextInt(), sc.next());
+        Employee e2 = new Employee(sc.nextInt(),sc.next(), sc.nextInt(), sc.next());
+        Employee e3 = new Employee(sc.nextInt(),sc.next(), sc.nextInt(), sc.next());
+        sc.close();
+        System.out.println("Employees with salary greater than 50,000:");
+        if (e1.salary > 50000) e1.display();
+        if (e2.salary > 50000) e2.display();
+        if (e3.salary > 50000) e3.display();
+
+        System.out.println("Total number of Employee objects: " + Employee.count);
+    }
+}

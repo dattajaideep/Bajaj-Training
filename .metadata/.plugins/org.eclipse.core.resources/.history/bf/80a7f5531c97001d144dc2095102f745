@@ -1,0 +1,11 @@
+package com.unext.shape;
+
+class hape {
+	protected String shapeName;
+	public shape(String shapeName) {
+		this.shapeName=shapeName;
+	}
+	public double caluculateArea() {
+		return 0.0;
+	}
+}

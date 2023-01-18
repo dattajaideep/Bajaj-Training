@@ -1,0 +1,15 @@
+package com.unext.bean;
+
+public class testEmployee {
+	public static void main(String[] args) {
+		Employee emp1=new Employee();
+		emp1.setData(101, "Asha",35000);
+		emp1.display();
+		
+		Employee emp2=new Employee();
+		emp2.setData(102, "Disha",30000);
+		emp2.display();
+		
+		
+	}
+}

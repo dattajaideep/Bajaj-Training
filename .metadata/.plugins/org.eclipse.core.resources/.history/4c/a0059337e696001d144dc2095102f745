@@ -1,0 +1,7 @@
+package com.javaruns.basics;
+import java.util.*;
+public class Employee {
+	Employee(int eid,String name,int salary){
+		
+	}
+}

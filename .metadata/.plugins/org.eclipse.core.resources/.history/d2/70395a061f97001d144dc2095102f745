@@ -1,0 +1,13 @@
+package com.unext.shape;
+
+public class Circle extends shape{
+	int radius;
+	public Circle(int radius) {
+		super("Circle");
+		this.radius=radius;
+	}
+	public double caluculateArea() {
+		return radius*radius;
+	}
+	
+}

@@ -1,0 +1,10 @@
+package com.unext.bean;
+
+public class Account {
+
+	public void setAnumber(int i) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+}

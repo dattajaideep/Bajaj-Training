@@ -1,0 +1,17 @@
+package com.unext.inheritance;
+
+public class TestParentChild {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Parent ref;
+		ref=new Parent();
+		ref.display();//parent
+		//ref.show();//ERROR
+		ref=new Child();
+		ref.display();//Child
+		//ref.show();//ERROR
+		
+	}
+
+}

@@ -1,0 +1,10 @@
+package com.unext.bean;
+//This is a composition relationship
+public class customer {
+	private int cid;
+	private String name;
+	private Account account;
+	public customer() {
+		account = new Account();
+	}
+}

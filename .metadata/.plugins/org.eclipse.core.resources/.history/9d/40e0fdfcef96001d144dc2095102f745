@@ -1,0 +1,13 @@
+package com.unext.bean;
+
+public class Testcustomer {
+	public static void main(String[] args) {
+		customer c1=new customer();
+		c1.setcId(101);
+		c1.setname("jam");
+		Account account =c1.getAccount();
+		account.setAnumber(112233);
+		account.setBalance(5000);
+		System.out.println(c1.getcId()+" "+c1.getName()+" "+c1.getAccount().getAccount()+" "+c1.);
+	}
+}

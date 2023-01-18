@@ -1,0 +1,16 @@
+package com.unext.bean;
+
+public class Employee {
+	int eId;
+	String name;
+	double salary;
+	public void setData(int eId,String name,double salary) {
+		this.eId=eId;
+		this.name=name;
+		this.salary=salary;
+	}
+	public void display() {
+		int sum;
+		System.out.println(eId+" "+name+" "+salary);
+	}
+}

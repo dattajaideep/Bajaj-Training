@@ -1,0 +1,13 @@
+package com.day2.shape.task;
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		shape s = new Square(20);
+		shape rec = new Rectangle(2,3);
+		shape cir=new Circle(20);
+		System.out.println(s.caluculateArea()+" "+rec.caluculateArea()+" "+cir.caluculateArea());
+		
+	}
+
+}

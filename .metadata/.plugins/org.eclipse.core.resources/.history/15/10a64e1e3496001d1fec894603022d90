@@ -1,0 +1,14 @@
+package JavaPrograms;
+
+public class Typecasting {
+	public static void main(String[] args)
+    {
+        byte num=10;
+        short num1=1000;
+        double salary = num;
+        double rate=10.5;
+        float flowrate=10.5f;
+        // Apply impicit and explicit
+        
+    }
+}

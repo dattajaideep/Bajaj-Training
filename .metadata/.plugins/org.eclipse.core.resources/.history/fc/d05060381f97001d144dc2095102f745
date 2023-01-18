@@ -1,0 +1,15 @@
+package com.unext.shape;
+import java.util.*;
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner sc=new Scanner(System.in);
+		shape s = new Square(20);
+		shape rec = new Rectangle(2,3);
+		shape cir=new Circle(20);
+		System.out.println(s.caluculateArea()+" "+rec.caluculateArea()+" "+cir.caluculateArea());
+		
+	}
+
+}
