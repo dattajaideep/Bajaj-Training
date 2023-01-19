@@ -4,8 +4,7 @@ public class TestVoter {
 
 	public static void main(String[] args) {
 		Voter voter2 = new Voter();
-		voter2.validateage(15);
-		voter2.justFun();
+		voter2.validateage(18);
 		System.out.println("Validation Done");
 		
 	}

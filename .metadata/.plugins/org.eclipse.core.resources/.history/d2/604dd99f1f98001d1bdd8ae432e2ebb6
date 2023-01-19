@@ -8,6 +8,7 @@ public class Voter {
 		try {
 			if(Age>=18) {
 				//Block of statements
+				int c=Age/b;
 			}
 			else {
 				throw new AgeInvalidException("Age needs to be above 17");

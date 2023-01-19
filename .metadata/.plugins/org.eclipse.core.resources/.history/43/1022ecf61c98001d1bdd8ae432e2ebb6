@@ -2,7 +2,7 @@ package com.day2.relations;
 
 import java.util.Objects;
 
-public class Employee implements comparable{
+public class Employee {
 	int eId;
 	String name;
 	double salary;

@@ -22,8 +22,7 @@ public class MyListEmployee {
 		list.add(emp3);
 		list.add(emp4);
 		
-		//Collections.sort(list);//The method sort(List<T>) in the type Collections is not applicable 
-		//for the arguments (List<Employee>)
+		//Collections.sort(list);//The method sort(List<T>) in the type Collections is not applicable for the arguments (List<Employee>)
 		Collections.sort(list,new MySalaryComparator());
 		for(Employee emp:list) {
 			System.out.println(emp);

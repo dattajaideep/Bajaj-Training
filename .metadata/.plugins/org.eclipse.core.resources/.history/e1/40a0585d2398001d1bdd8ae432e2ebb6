@@ -1,4 +1,4 @@
- package com.day2.shape.task;
+package com.day2.shape.task;
 
 class shape {
 	protected String shapeName;

@@ -1,13 +1,10 @@
 package com.day2.exception;
 
-import java.util.Scanner;
 public class Voter {
-	public void validateage(int Age) {
-		Scanner sc=new Scanner(System.in);
-		int b=sc.nextInt();
+	public static void validateage(int Age) {
 		try {
 			if(Age>=18) {
-				//Block of statements
+				
 			}
 			else {
 				throw new AgeInvalidException("Age needs to be above 17");
