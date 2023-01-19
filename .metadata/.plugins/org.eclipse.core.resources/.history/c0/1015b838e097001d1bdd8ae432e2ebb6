@@ -1,0 +1,21 @@
+package com.day3.collections;
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class Myset {
+
+	public static void main(String[] args) {
+		myHashSet();
+	}
+	public static void myHashSet() {
+		Set<String> set=new HashSet<String>();
+		set.add("Ram");
+		set.add("Shayam");
+		set.add("Kya");
+		set.add("jam");
+		set.add("Mhe Bhuka Hua");
+		System.out.println(set);
+	}
+
+}

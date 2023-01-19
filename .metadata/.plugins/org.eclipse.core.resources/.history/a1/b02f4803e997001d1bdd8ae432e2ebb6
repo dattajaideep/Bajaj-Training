@@ -1,0 +1,7 @@
+package com.day3.taskexceptions;
+
+public class Expiryexception extends Exception{
+	public Expiryexception(String message) {
+		super(message);
+	}
+}

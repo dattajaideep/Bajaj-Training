@@ -1,0 +1,26 @@
+package com.day3.taskexceptions;
+import java.util.*;
+public class mulcatch {
+	public static void main(String[]args) {
+		try(Scanner sc=new Scanner(System.in)){
+			int age=sc.nextInt();
+			int year=sc.nextInt();
+			if(age>18) {
+				if(year>2025) {
+					System.out.println("Validated");
+				}
+				else {
+					throw new Expiryexception("Your Id need to be renewed");
+				}
+			}
+			else {
+				throw new InvalidAgeException("Age nedds to be above 18");
+			}
+		}catch(Expiryexception e) {
+			System.out.println(e.getMessage());
+		}
+		catch(InvalidAgeException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+}

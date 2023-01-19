@@ -1,0 +1,36 @@
+package com.day3.collections;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+public class Mylist {
+	public static void main(String[] args) {
+		Mylist.myArrayList();
+	}
+	public static void myArrayList() {
+		List<String> list=new ArrayList<String>();
+		list.add("Ram");
+		list.add("Shayam");
+		list.add("Kya");
+		list.add("Jam");
+		list.add("I am Hungry now");
+		System.out.println(list);//Internally it is using toString to give the output
+		System.out.println("Simple FOR");
+		for(int i=0;i<list.size();i++) {
+			System.out.println(list.get(i));
+		}
+		System.out.println("Adv FOR");
+		for(String name:list) {
+			System.out.println(name);
+		}
+		System.out.println("List iterator");
+		Iterator<String> itr=list.iterator();
+		while(itr.hasNext()) {
+			System.out.println(itr.next());
+		}
+		System.out.println("List Iterator");
+		
+	}
+
+}
