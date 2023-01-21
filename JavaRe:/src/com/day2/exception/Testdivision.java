@@ -1,9 +1,0 @@
-package com.day2.exception;
-
-public class Testdivision {
-	public static void main(String[] args) throws InterruptedException,ClassNotFoundException{
-		Division obj=new Division();
-		Division.division(20, 0);
-		obj.justfun();
-	}
-}
