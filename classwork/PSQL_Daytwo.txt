@@ -1,0 +1,699 @@
+
+Server [localhost]: 
+Database [postgres]: 
+Port [5432]: 
+Username [postgres]: 
+Password for user postgres: 
+psql (15.1)
+
+postgres=# \l
+                                            List of databases
+   Name    |  Owner   | Encoding | Collate | Ctype | ICU Locale | Locale Provider |   Access privileges   
+-----------+----------+----------+---------+-------+------------+-----------------+-----------------------
+ pgdata    | postgres | UTF8     | C       | C     |            | libc            | 
+ postgres  | postgres | UTF8     | C       | C     |            | libc            | 
+ template0 | postgres | UTF8     | C       | C     |            | libc            | =c/postgres          +
+           |          |          |         |       |            |                 | postgres=CTc/postgres
+ template1 | postgres | UTF8     | C       | C     |            | libc            | =c/postgres          +
+           |          |          |         |       |            |                 | postgres=CTc/postgres
+ testingdb | postgres | UTF8     | C       | C     |            | libc            | 
+(5 rows)
+
+postgres=# \c pgdata
+You are now connected to database "pgdata" as user "postgres".
+
+pgdata=# \d
+        List of relations
+ Schema | Name | Type  |  Owner   
+--------+------+-------+----------
+ public | dept | table | postgres
+ public | emp  | table | postgres
+(2 rows)
+
+pgdata=# select * from emp;
+ eid |  ename  | salary | did 
+-----+---------+--------+-----
+ 104 | Jaideep |     10 |   1
+ 101 | SARAV   |     40 |   1
+ 102 | SARAV   |     50 |   1
+ 103 | SARAV   |     60 |   1
+ 105 | Jaideep |     30 |   2
+ 106 | Jaideep |     20 |   2
+ 107 | USAF    | 70.003 |   2
+ 108 | USAF    |      0 |   2
+ 109 | USAF    |    120 |   3
+ 110 | TAKUR   |    110 |   3
+ 111 | TAKUR   |    100 |   4
+ 112 | TAKUR   |     90 |   4
+ 113 | JAIDEEP |     80 |   4
+(13 rows)
+
+pgdata=# select * from dept;
+ did |      dname      | fnum 
+-----+-----------------+------
+   1 | Matchground     |    9
+   2 | Practice ground |    8
+   3 | Meeting Area    |    5
+   4 | Management      |    6
+   5 | resturant       |    3
+(5 rows)
+
+pgdata=# select * from emp order by eid DESC;
+ eid |  ename  | salary | did 
+-----+---------+--------+-----
+ 113 | JAIDEEP |     80 |   4
+ 112 | TAKUR   |     90 |   4
+ 111 | TAKUR   |    100 |   4
+ 110 | TAKUR   |    110 |   3
+ 109 | USAF    |    120 |   3
+ 108 | USAF    |      0 |   2
+ 107 | USAF    | 70.003 |   2
+ 106 | Jaideep |     20 |   2
+ 105 | Jaideep |     30 |   2
+ 104 | Jaideep |     10 |   1
+ 103 | SARAV   |     60 |   1
+ 102 | SARAV   |     50 |   1
+ 101 | SARAV   |     40 |   1
+(13 rows)
+
+pgdata=# select * from emp;
+ eid |  ename  | salary | did 
+-----+---------+--------+-----
+ 104 | Jaideep |     10 |   1
+ 101 | SARAV   |     40 |   1
+ 102 | SARAV   |     50 |   1
+ 103 | SARAV   |     60 |   1
+ 105 | Jaideep |     30 |   2
+ 106 | Jaideep |     20 |   2
+ 107 | USAF    | 70.003 |   2
+ 108 | USAF    |      0 |   2
+ 109 | USAF    |    120 |   3
+ 110 | TAKUR   |    110 |   3
+ 111 | TAKUR   |    100 |   4
+ 112 | TAKUR   |     90 |   4
+ 113 | JAIDEEP |     80 |   4
+(13 rows)
+
+pgdata=# select * from emp order by eid DESC;
+ eid |  ename  | salary | did 
+-----+---------+--------+-----
+ 113 | JAIDEEP |     80 |   4
+ 112 | TAKUR   |     90 |   4
+ 111 | TAKUR   |    100 |   4
+ 110 | TAKUR   |    110 |   3
+ 109 | USAF    |    120 |   3
+ 108 | USAF    |      0 |   2
+ 107 | USAF    | 70.003 |   2
+ 106 | Jaideep |     20 |   2
+ 105 | Jaideep |     30 |   2
+ 104 | Jaideep |     10 |   1
+ 103 | SARAV   |     60 |   1
+ 102 | SARAV   |     50 |   1
+ 101 | SARAV   |     40 |   1
+(13 rows)
+
+pgdata=# select * from dept order by did DESC;
+ did |      dname      | fnum 
+-----+-----------------+------
+   5 | resturant       |    3
+   4 | Management      |    6
+   3 | Meeting Area    |    5
+   2 | Practice ground |    8
+   1 | Matchground     |    9
+(5 rows)
+
+pgdata=# select (eid,ename,salary) from emp inner join dept on emp.did=dept.did;
+        row        
+-------------------
+ (104,Jaideep,10)
+ (101,SARAV,40)
+ (102,SARAV,50)
+ (103,SARAV,60)
+ (105,Jaideep,30)
+ (106,Jaideep,20)
+ (107,USAF,70.003)
+ (108,USAF,0)
+ (109,USAF,120)
+ (110,TAKUR,110)
+ (111,TAKUR,100)
+ (112,TAKUR,90)
+ (113,JAIDEEP,80)
+(13 rows)
+
+pgdata=# select (eid,ename,salary) from emp inner join dept on emp.did=dept.did;
+        row        
+-------------------
+ (104,Jaideep,10)
+ (101,SARAV,40)
+ (102,SARAV,50)
+ (103,SARAV,60)
+ (105,Jaideep,30)
+ (106,Jaideep,20)
+ (107,USAF,70.003)
+ (108,USAF,0)
+ (109,USAF,120)
+ (110,TAKUR,110)
+ (111,TAKUR,100)
+ (112,TAKUR,90)
+ (113,JAIDEEP,80)
+(13 rows)
+
+pgdata=# SELECT (eid,ename,salary) from emp full outer join dept on emp.did=dept.did;
+        row        
+-------------------
+ (104,Jaideep,10)
+ (101,SARAV,40)
+ (102,SARAV,50)
+ (103,SARAV,60)
+ (105,Jaideep,30)
+ (106,Jaideep,20)
+ (107,USAF,70.003)
+ (108,USAF,0)
+ (109,USAF,120)
+ (110,TAKUR,110)
+ (111,TAKUR,100)
+ (112,TAKUR,90)
+ (113,JAIDEEP,80)
+ (,,)
+(14 rows)
+
+pgdata=# select (eid,ename,salary) from emp inner join dept on emp.did=dept.did;
+        row        
+-------------------
+ (104,Jaideep,10)
+ (101,SARAV,40)
+ (102,SARAV,50)
+ (103,SARAV,60)
+ (105,Jaideep,30)
+ (106,Jaideep,20)
+ (107,USAF,70.003)
+ (108,USAF,0)
+ (109,USAF,120)
+ (110,TAKUR,110)
+ (111,TAKUR,100)
+ (112,TAKUR,90)
+ (113,JAIDEEP,80)
+(13 rows)
+
+pgdata=# SELECT (eid,ename,salary) from emp LEFT JOIN dept  ON emp.did=dept.did;
+        row        
+-------------------
+ (104,Jaideep,10)
+ (101,SARAV,40)
+ (102,SARAV,50)
+ (103,SARAV,60)
+ (105,Jaideep,30)
+ (106,Jaideep,20)
+ (107,USAF,70.003)
+ (108,USAF,0)
+ (109,USAF,120)
+ (110,TAKUR,110)
+ (111,TAKUR,100)
+ (112,TAKUR,90)
+ (113,JAIDEEP,80)
+(13 rows)
+
+pgdata=# SELECT (eid,ename,dname) from emp LEFT JOIN dept  ON emp.did=dept.did;
+               row               
+---------------------------------
+ (104,Jaideep,Matchground)
+ (101,SARAV,Matchground)
+ (102,SARAV,Matchground)
+ (103,SARAV,Matchground)
+ (105,Jaideep,"Practice ground")
+ (106,Jaideep,"Practice ground")
+ (107,USAF,"Practice ground")
+ (108,USAF,"Practice ground")
+ (109,USAF,"Meeting Area")
+ (110,TAKUR,"Meeting Area")
+ (111,TAKUR,Management)
+ (112,TAKUR,Management)
+ (113,JAIDEEP,Management)
+(13 rows)
+
+pgdata=# select * from emp;
+ eid |  ename  | salary | did 
+-----+---------+--------+-----
+ 104 | Jaideep |     10 |   1
+ 101 | SARAV   |     40 |   1
+ 102 | SARAV   |     50 |   1
+ 103 | SARAV   |     60 |   1
+ 105 | Jaideep |     30 |   2
+ 106 | Jaideep |     20 |   2
+ 107 | USAF    | 70.003 |   2
+ 108 | USAF    |      0 |   2
+ 109 | USAF    |    120 |   3
+ 110 | TAKUR   |    110 |   3
+ 111 | TAKUR   |    100 |   4
+ 112 | TAKUR   |     90 |   4
+ 113 | JAIDEEP |     80 |   4
+(13 rows)
+
+pgdata=# select * from dept;
+ did |      dname      | fnum 
+-----+-----------------+------
+   1 | Matchground     |    9
+   2 | Practice ground |    8
+   3 | Meeting Area    |    5
+   4 | Management      |    6
+   5 | resturant       |    3
+(5 rows)
+
+pgdata=# insert into emp values(114,'Rohith',16);
+INSERT 0 1
+
+pgdata=# select * from emp;
+ eid |  ename  | salary | did 
+-----+---------+--------+-----
+ 104 | Jaideep |     10 |   1
+ 101 | SARAV   |     40 |   1
+ 102 | SARAV   |     50 |   1
+ 103 | SARAV   |     60 |   1
+ 105 | Jaideep |     30 |   2
+ 106 | Jaideep |     20 |   2
+ 107 | USAF    | 70.003 |   2
+ 108 | USAF    |      0 |   2
+ 109 | USAF    |    120 |   3
+ 110 | TAKUR   |    110 |   3
+ 111 | TAKUR   |    100 |   4
+ 112 | TAKUR   |     90 |   4
+ 113 | JAIDEEP |     80 |   4
+ 114 | Rohith  |     16 |    
+(14 rows)
+
+pgdata=# select * from dept;
+ did |      dname      | fnum 
+-----+-----------------+------
+   1 | Matchground     |    9
+   2 | Practice ground |    8
+   3 | Meeting Area    |    5
+   4 | Management      |    6
+   5 | resturant       |    3
+(5 rows)
+
+pgdata=# SELECT (ename,dname,salary) from emp LEFT JOIN dept  ON emp.did=dept.did;
+               row               
+---------------------------------
+ (Jaideep,Matchground,10)
+ (SARAV,Matchground,40)
+ (SARAV,Matchground,50)
+ (SARAV,Matchground,60)
+ (Jaideep,"Practice ground",30)
+ (Jaideep,"Practice ground",20)
+ (USAF,"Practice ground",70.003)
+ (USAF,"Practice ground",0)
+ (USAF,"Meeting Area",120)
+ (TAKUR,"Meeting Area",110)
+ (TAKUR,Management,100)
+ (TAKUR,Management,90)
+ (JAIDEEP,Management,80)
+ (Rohith,,16)
+(14 rows)
+
+pgdata=# SELECT (ename,dname,salary) from emp RIGHT JOIN dept  ON emp.did=dept.did;
+               row               
+---------------------------------
+ (Jaideep,Matchground,10)
+ (SARAV,Matchground,40)
+ (SARAV,Matchground,50)
+ (SARAV,Matchground,60)
+ (Jaideep,"Practice ground",30)
+ (Jaideep,"Practice ground",20)
+ (USAF,"Practice ground",70.003)
+ (USAF,"Practice ground",0)
+ (USAF,"Meeting Area",120)
+ (TAKUR,"Meeting Area",110)
+ (TAKUR,Management,100)
+ (TAKUR,Management,90)
+ (JAIDEEP,Management,80)
+ (,resturant,)
+(14 rows)
+
+pgdata=# SELECT * from emp e inner join dept d on e.did <> d.did;
+ eid |  ename  | salary | did | did |      dname      | fnum 
+-----+---------+--------+-----+-----+-----------------+------
+ 105 | Jaideep |     30 |   2 |   1 | Matchground     |    9
+ 106 | Jaideep |     20 |   2 |   1 | Matchground     |    9
+ 107 | USAF    | 70.003 |   2 |   1 | Matchground     |    9
+ 108 | USAF    |      0 |   2 |   1 | Matchground     |    9
+ 109 | USAF    |    120 |   3 |   1 | Matchground     |    9
+ 110 | TAKUR   |    110 |   3 |   1 | Matchground     |    9
+ 111 | TAKUR   |    100 |   4 |   1 | Matchground     |    9
+ 112 | TAKUR   |     90 |   4 |   1 | Matchground     |    9
+ 113 | JAIDEEP |     80 |   4 |   1 | Matchground     |    9
+ 104 | Jaideep |     10 |   1 |   2 | Practice ground |    8
+ 101 | SARAV   |     40 |   1 |   2 | Practice ground |    8
+ 102 | SARAV   |     50 |   1 |   2 | Practice ground |    8
+ 103 | SARAV   |     60 |   1 |   2 | Practice ground |    8
+ 109 | USAF    |    120 |   3 |   2 | Practice ground |    8
+ 110 | TAKUR   |    110 |   3 |   2 | Practice ground |    8
+ 111 | TAKUR   |    100 |   4 |   2 | Practice ground |    8
+ 112 | TAKUR   |     90 |   4 |   2 | Practice ground |    8
+ 113 | JAIDEEP |     80 |   4 |   2 | Practice ground |    8
+ 104 | Jaideep |     10 |   1 |   3 | Meeting Area    |    5
+ 101 | SARAV   |     40 |   1 |   3 | Meeting Area    |    5
+ 102 | SARAV   |     50 |   1 |   3 | Meeting Area    |    5
+ 103 | SARAV   |     60 |   1 |   3 | Meeting Area    |    5
+ 105 | Jaideep |     30 |   2 |   3 | Meeting Area    |    5
+ 106 | Jaideep |     20 |   2 |   3 | Meeting Area    |    5
+ 107 | USAF    | 70.003 |   2 |   3 | Meeting Area    |    5
+ 108 | USAF    |      0 |   2 |   3 | Meeting Area    |    5
+ 111 | TAKUR   |    100 |   4 |   3 | Meeting Area    |    5
+ 112 | TAKUR   |     90 |   4 |   3 | Meeting Area    |    5
+ 113 | JAIDEEP |     80 |   4 |   3 | Meeting Area    |    5
+ 104 | Jaideep |     10 |   1 |   4 | Management      |    6
+ 101 | SARAV   |     40 |   1 |   4 | Management      |    6
+ 102 | SARAV   |     50 |   1 |   4 | Management      |    6
+ 103 | SARAV   |     60 |   1 |   4 | Management      |    6
+ 105 | Jaideep |     30 |   2 |   4 | Management      |    6
+ 106 | Jaideep |     20 |   2 |   4 | Management      |    6
+ 107 | USAF    | 70.003 |   2 |   4 | Management      |    6
+ 108 | USAF    |      0 |   2 |   4 | Management      |    6
+ 109 | USAF    |    120 |   3 |   4 | Management      |    6
+ 110 | TAKUR   |    110 |   3 |   4 | Management      |    6
+ 104 | Jaideep |     10 |   1 |   5 | resturant       |    3
+ 101 | SARAV   |     40 |   1 |   5 | resturant       |    3
+ 102 | SARAV   |     50 |   1 |   5 | resturant       |    3
+ 103 | SARAV   |     60 |   1 |   5 | resturant       |    3
+ 105 | Jaideep |     30 |   2 |   5 | resturant       |    3
+ 106 | Jaideep |     20 |   2 |   5 | resturant       |    3
+ 107 | USAF    | 70.003 |   2 |   5 | resturant       |    3
+ 108 | USAF    |      0 |   2 |   5 | resturant       |    3
+ 109 | USAF    |    120 |   3 |   5 | resturant       |    3
+ 110 | TAKUR   |    110 |   3 |   5 | resturant       |    3
+ 111 | TAKUR   |    100 |   4 |   5 | resturant       |    3
+ 112 | TAKUR   |     90 |   4 |   5 | resturant       |    3
+ 113 | JAIDEEP |     80 |   4 |   5 | resturant       |    3
+(52 rows)
+
+pgdata=# UPDATE emp set salary =salary * 0.50 WHERE eid IN (SELECT eid FROM emp where eid >= 110);
+UPDATE 5
+
+pgdata=# select * from emp;
+ eid |  ename  | salary | did 
+-----+---------+--------+-----
+ 104 | Jaideep |     10 |   1
+ 101 | SARAV   |     40 |   1
+ 102 | SARAV   |     50 |   1
+ 103 | SARAV   |     60 |   1
+ 105 | Jaideep |     30 |   2
+ 106 | Jaideep |     20 |   2
+ 107 | USAF    | 70.003 |   2
+ 108 | USAF    |      0 |   2
+ 109 | USAF    |    120 |   3
+ 110 | TAKUR   |     55 |   3
+ 111 | TAKUR   |     50 |   4
+ 112 | TAKUR   |     45 |   4
+ 113 | JAIDEEP |     40 |   4
+ 114 | Rohith  |      8 |    
+(14 rows)
+
+pgdata=# SELECT * from emp e where salary>(select AVG(salary) from emp where did=e.did);
+ eid | ename | salary | did 
+-----+-------+--------+-----
+ 102 | SARAV |     50 |   1
+ 103 | SARAV |     60 |   1
+ 107 | USAF  | 70.003 |   2
+ 109 | USAF  |    120 |   3
+ 111 | TAKUR |     50 |   4
+(5 rows)
+
+pgdata=# SELECT * from emp e where salary>(select AVG(salary) from emp);
+ eid | ename | salary | did 
+-----+-------+--------+-----
+ 102 | SARAV |     50 |   1
+ 103 | SARAV |     60 |   1
+ 107 | USAF  | 70.003 |   2
+ 109 | USAF  |    120 |   3
+ 110 | TAKUR |     55 |   3
+ 111 | TAKUR |     50 |   4
+ 112 | TAKUR |     45 |   4
+(7 rows)
+
+pgdata=# select * from emp;
+ eid |  ename  | salary | did 
+-----+---------+--------+-----
+ 104 | Jaideep |     10 |   1
+ 101 | SARAV   |     40 |   1
+ 102 | SARAV   |     50 |   1
+ 103 | SARAV   |     60 |   1
+ 105 | Jaideep |     30 |   2
+ 106 | Jaideep |     20 |   2
+ 107 | USAF    | 70.003 |   2
+ 108 | USAF    |      0 |   2
+ 109 | USAF    |    120 |   3
+ 110 | TAKUR   |     55 |   3
+ 111 | TAKUR   |     50 |   4
+ 112 | TAKUR   |     45 |   4
+ 113 | JAIDEEP |     40 |   4
+ 114 | Rohith  |      8 |    
+(14 rows)
+
+pgdata=# select avg(salary) from emp;
+        avg        
+-------------------
+ 42.71449988228934
+(1 row)
+
+
+pgdata=# begin;
+BEGIN
+
+pgdata=*# delete from emp  where eid=109;
+DELETE 1
+
+pgdata=*# select * from emp;
+ eid |  ename  | salary | did 
+-----+---------+--------+-----
+ 104 | Jaideep |     10 |   1
+ 101 | SARAV   |     40 |   1
+ 102 | SARAV   |     50 |   1
+ 103 | SARAV   |     60 |   1
+ 105 | Jaideep |     30 |   2
+ 106 | Jaideep |     20 |   2
+ 107 | USAF    | 70.003 |   2
+ 108 | USAF    |      0 |   2
+ 110 | TAKUR   |     55 |   3
+ 111 | TAKUR   |     50 |   4
+ 112 | TAKUR   |     45 |   4
+ 113 | JAIDEEP |     40 |   4
+ 114 | Rohith  |      8 |    
+(13 rows)
+
+pgdata=*# delete from emp  where eid=108 OR eid=106 OR eid=111 OR eid=112 OR eid=113;
+DELETE 5
+
+pgdata=*# select * from emp;
+ eid |  ename  | salary | did 
+-----+---------+--------+-----
+ 104 | Jaideep |     10 |   1
+ 101 | SARAV   |     40 |   1
+ 102 | SARAV   |     50 |   1
+ 103 | SARAV   |     60 |   1
+ 105 | Jaideep |     30 |   2
+ 107 | USAF    | 70.003 |   2
+ 110 | TAKUR   |     55 |   3
+ 114 | Rohith  |      8 |    
+(8 rows)
+
+pgdata=*# UPDATE emp set eid=106 where ename='USAF';
+UPDATE 1
+
+pgdata=*# select * from emp;
+ eid |  ename  | salary | did 
+-----+---------+--------+-----
+ 104 | Jaideep |     10 |   1
+ 101 | SARAV   |     40 |   1
+ 102 | SARAV   |     50 |   1
+ 103 | SARAV   |     60 |   1
+ 105 | Jaideep |     30 |   2
+ 110 | TAKUR   |     55 |   3
+ 114 | Rohith  |      8 |    
+ 106 | USAF    | 70.003 |   2
+(8 rows)
+
+pgdata=*# UPDATE emp set eid=108 where ename='TAKUR';
+UPDATE 1
+
+pgdata=*# UPDATE emp set eid=109 where ename='Rohith';
+UPDATE 1
+
+pgdata=*# select * from emp;
+ eid |  ename  | salary | did 
+-----+---------+--------+-----
+ 104 | Jaideep |     10 |   1
+ 101 | SARAV   |     40 |   1
+ 102 | SARAV   |     50 |   1
+ 103 | SARAV   |     60 |   1
+ 105 | Jaideep |     30 |   2
+ 106 | USAF    | 70.003 |   2
+ 108 | TAKUR   |     55 |   3
+ 109 | Rohith  |      8 |    
+(8 rows)
+
+pgdata=*# INSERT INTO emp values(107,'Getlost',26),(110,'Byebye',29);
+INSERT 0 2
+
+pgdata=*# select * from emp;
+ eid |  ename  | salary | did 
+-----+---------+--------+-----
+ 104 | Jaideep |     10 |   1
+ 101 | SARAV   |     40 |   1
+ 102 | SARAV   |     50 |   1
+ 103 | SARAV   |     60 |   1
+ 105 | Jaideep |     30 |   2
+ 106 | USAF    | 70.003 |   2
+ 108 | TAKUR   |     55 |   3
+ 109 | Rohith  |      8 |    
+ 107 | Getlost |     26 |    
+ 110 | Byebye  |     29 |    
+(10 rows)
+
+pgdata=*# COMMIT;
+COMMIT
+
+pgdata=# select * from emp;
+ eid |  ename  | salary | did 
+-----+---------+--------+-----
+ 104 | Jaideep |     10 |   1
+ 101 | SARAV   |     40 |   1
+ 102 | SARAV   |     50 |   1
+ 103 | SARAV   |     60 |   1
+ 105 | Jaideep |     30 |   2
+ 106 | USAF    | 70.003 |   2
+ 108 | TAKUR   |     55 |   3
+ 109 | Rohith  |      8 |    
+ 107 | Getlost |     26 |    
+ 110 | Byebye  |     29 |    
+(10 rows)
+
+pgdata=# EXPLAIN SELECT * FROM emp;
+                     QUERY PLAN                      
+-----------------------------------------------------
+ Seq Scan on emp  (cost=0.00..1.14 rows=14 width=18)
+(1 row)
+
+pgdata=# create index empindex ON emp(eid);
+CREATE INDEX
+pgdata=# EXPLAIN SELECT * FROM emp;
+                     QUERY PLAN                      
+-----------------------------------------------------
+ Seq Scan on emp  (cost=0.00..1.10 rows=10 width=18)
+(1 row)
+
+pgdata=# select * from emp;
+ eid |  ename  | salary | did 
+-----+---------+--------+-----
+ 104 | Jaideep |     10 |   1
+ 101 | SARAV   |     40 |   1
+ 102 | SARAV   |     50 |   1
+ 103 | SARAV   |     60 |   1
+ 105 | Jaideep |     30 |   2
+ 106 | USAF    | 70.003 |   2
+ 108 | TAKUR   |     55 |   3
+ 109 | Rohith  |      8 |    
+ 107 | Getlost |     26 |    
+ 110 | Byebye  |     29 |    
+(10 rows)
+
+pgdata=# explain select * from emp where eid = 109;
+                     QUERY PLAN                     
+----------------------------------------------------
+ Seq Scan on emp  (cost=0.00..1.12 rows=1 width=18)
+   Filter: (eid = 109)
+(2 rows)
+
+pgdata=# CREATE VIEW didsalary AS SELECT did,salary FROM emp WHERE did<>emp.did;
+CREATE VIEW
+
+pgdata=# SELECT * FROM didsalary;
+
+ did | salary 
+-----+--------
+(0 rows)
+
+pgdata=# DROP VIEW didsalary;
+DROP VIEW
+
+pgdata=# CREATE VIEW didsalary AS SELECT did,salary FROM emp WHERE salary>50;
+CREATE VIEW
+
+pgdata=# SELECT * FROM didsalary;
+ did | salary 
+-----+--------
+   1 |     60
+   2 | 70.003
+   3 |     55
+(3 rows)
+
+pgdata=# INSERT INTO emp values(111,'ASHA',130,4);
+INSERT 0 1
+
+pgdata=# SELECT * FROM didsalary;
+ did | salary 
+-----+--------
+   1 |     60
+   2 | 70.003
+   3 |     55
+   4 |    130
+(4 rows)
+
+pgdata=# \d
+           List of relations
+ Schema |   Name    | Type  |  Owner   
+--------+-----------+-------+----------
+ public | dept      | table | postgres
+ public | didsalary | view  | postgres
+ public | emp       | table | postgres
+(3 rows)
+
+pgdata=# \db
+       List of tablespaces
+    Name    |  Owner   | Location 
+------------+----------+----------
+ pg_default | postgres | 
+ pg_global  | postgres | 
+(2 rows)
+
+pgdata=# \dv
+          List of relations
+ Schema |   Name    | Type |  Owner   
+--------+-----------+------+----------
+ public | didsalary | view | postgres
+(1 row)
+
+pgdata-# \dv
+          List of relations
+ Schema |   Name    | Type |  Owner   
+--------+-----------+------+----------
+ public | didsalary | view | postgres
+(1 row)
+
+pgdata-# \d
+           List of relations
+ Schema |   Name    | Type  |  Owner   
+--------+-----------+-------+----------
+ public | dept      | table | postgres
+ public | didsalary | view  | postgres
+ public | emp       | table | postgres
+(3 rows)
+
+pgdata-# \db
+       List of tablespaces
+    Name    |  Owner   | Location 
+------------+----------+----------
+ pg_default | postgres | 
+ pg_global  | postgres | 
+(2 rows)
+
+pgdata=# CREATE TABLE arrtab(snum INT NOT NULL, cmen TEXT,cnum TEXT[]);
+CREATE TABLE
+
+pgdata=# INSERT INTO arrtab values(1,'DATTTA',array['9100820659','9959070819']);
+INSERT 0 1
+
+pgdata=# SELECT * FROM arrtab;
+ snum |  cmen  |          cnum           
+------+--------+-------------------------
+    1 | DATTTA | {9100820659,9959070819}
+(1 row)

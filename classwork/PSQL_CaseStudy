@@ -1,0 +1,505 @@
+Last login: Mon Jan 16 23:26:38 on ttys000
+jaideepvaranasi@L-YCF2GP4H0J ~ % /Library/PostgreSQL/15/scripts/runpsql.sh; exit
+Server [localhost]: 
+Database [postgres]: 
+Port [5432]: 
+Username [postgres]: 
+Password for user postgres: 
+psql (15.1)
+Type "help" for help.
+
+postgres=# \d
+          List of relations
+ Schema |   Name   | Type  |  Owner   
+--------+----------+-------+----------
+ public | washbook | table | postgres
+(1 row)
+
+postgres=# \db
+       List of tablespaces
+    Name    |  Owner   | Location 
+------------+----------+----------
+ pg_default | postgres | 
+ pg_global  | postgres | 
+(2 rows)
+
+postgres=# \l
+                                            List of databases
+   Name    |  Owner   | Encoding | Collate | Ctype | ICU Locale | Locale Provider |   Access privileges   
+-----------+----------+----------+---------+-------+------------+-----------------+-----------------------
+ pgdata    | postgres | UTF8     | C       | C     |            | libc            | 
+ postgres  | postgres | UTF8     | C       | C     |            | libc            | 
+ template0 | postgres | UTF8     | C       | C     |            | libc            | =c/postgres          +
+           |          |          |         |       |            |                 | postgres=CTc/postgres
+ template1 | postgres | UTF8     | C       | C     |            | libc            | =c/postgres          +
+           |          |          |         |       |            |                 | postgres=CTc/postgres
+ testingdb | postgres | UTF8     | C       | C     |            | libc            | 
+(5 rows)
+
+postgres=# create database DPhone
+postgres-# ;
+CREATE DATABASE
+postgres=# \l
+                                            List of databases
+   Name    |  Owner   | Encoding | Collate | Ctype | ICU Locale | Locale Provider |   Access privileges   
+-----------+----------+----------+---------+-------+------------+-----------------+-----------------------
+ dphone    | postgres | UTF8     | C       | C     |            | libc            | 
+ pgdata    | postgres | UTF8     | C       | C     |            | libc            | 
+ postgres  | postgres | UTF8     | C       | C     |            | libc            | 
+ template0 | postgres | UTF8     | C       | C     |            | libc            | =c/postgres          +
+           |          |          |         |       |            |                 | postgres=CTc/postgres
+ template1 | postgres | UTF8     | C       | C     |            | libc            | =c/postgres          +
+           |          |          |         |       |            |                 | postgres=CTc/postgres
+ testingdb | postgres | UTF8     | C       | C     |            | libc            | 
+(6 rows)
+
+postgres=# \c DPhone
+connection to server at "localhost" (::1), port 5432 failed: could not initiate GSSAPI security context:  Miscellaneous failure (see text): unable to reach any KDC in realm BFL.COM, tried 0 KDCs (negative cache)
+connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "DPhone" does not exist
+Previous connection kept
+postgres=# \c DPhone
+connection to server at "localhost" (::1), port 5432 failed: could not initiate GSSAPI security context:  Miscellaneous failure (see text): unable to reach any KDC in realm BFL.COM, tried 0 KDCs (negative cache)
+connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "DPhone" does not exist
+Previous connection kept
+postgres=# \c dphone
+You are now connected to database "dphone" as user "postgres".
+dphone=# create table user(usedId INT not null, firstname TEXT NOT NULL, lastname TEXT NOT NULL,address TEXT,mobile INT,email TEXT,username TEXT,password TEXT);
+ERROR:  syntax error at or near "user"
+LINE 1: create table user(usedId INT not null, firstname TEXT NOT NU...
+                     ^
+dphone=# create table User(usedId INT not null, firstname TEXT NOT NULL, lastname TEXT NOT NULL,address TEXT,mobile INT,email TEXT,username TEXT,password TEXT);
+ERROR:  syntax error at or near "User"
+LINE 1: create table User(usedId INT not null, firstname TEXT NOT NU...
+                     ^
+dphone=# create table Users(usedId INT not null, firstname TEXT NOT NULL, lastname TEXT NOT NULL,address TEXT,mobile INT,email TEXT,username TEXT,password TEXT);
+CREATE TABLE
+dphone=# create table referral(referalId INT not null, referalfirstname TEXT NOT NULL, referallastname TEXT NOT NULL, mobile INT,email TEXT,userid INT,dor TEXT,referalpoints INT,status TEXT);
+CREATE TABLE
+dphone=# DROP TABLE referral
+dphone-# ;
+DROP TABLE
+dphone=# create table referral(referalId INT not null, referalfirstname TEXT NOT NULL, referallastname TEXT NOT NULL, mobile INT,email TEXT,userId INT,dor TEXT,referalpoints INT,status TEXT);
+CREATE TABLE
+dphone=# alter table referral ADD CONSTRAINT fk_uid FOREIGN KEY(userId);
+ERROR:  syntax error at or near ";"
+LINE 1: ...er table referral ADD CONSTRAINT fk_uid FOREIGN KEY(userId);
+                                                                      ^
+dphone=# alter table referral ADD CONSTRAINT fk_uid FOREIGN KEY(userId) REFERENCES Users(userId);
+ERROR:  column "userid" referenced in foreign key constraint does not exist
+dphone=# DROP TABLE referral
+;
+DROP TABLE
+dphone=# create table referral(referalId INT not null, referalfirstname TEXT NOT NULL, referallastname TEXT NOT NULL, mobile INT,email TEXT,usedId INT,dor TEXT,referalpoints INT,status TEXT);
+CREATE TABLE
+dphone=# alter table referral ADD CONSTRAINT fk_uid FOREIGN KEY(usedId) REFERENCES Users(usedId);
+ERROR:  there is no unique constraint matching given keys for referenced table "users"
+dphone=# alter table referral ADD CONSTRAINT userId FOREIGN KEY(usedId) REFERENCES Users(usedId);
+ERROR:  there is no unique constraint matching given keys for referenced table "users"
+dphone=# alter table referral ADD CONSTRAINT usedId FOREIGN KEY(usedId) REFERENCES Users(usedId);
+ERROR:  there is no unique constraint matching given keys for referenced table "users"
+dphone=# alter table referral ADD CONSTRAINT fk_uid FOREIGN KEY(usedId) REFERENCES Users(usedId);
+ERROR:  there is no unique constraint matching given keys for referenced table "users"
+dphone=# DROP DATABASE
+dphone-# dphone;
+ERROR:  cannot drop the currently open database
+dphone=# \c testingdb
+You are now connected to database "testingdb" as user "postgres".
+testingdb=# DROP DATABASE
+dphone;
+DROP DATABASE
+testingdb=# \l
+                                            List of databases
+   Name    |  Owner   | Encoding | Collate | Ctype | ICU Locale | Locale Provider |   Access privileges   
+-----------+----------+----------+---------+-------+------------+-----------------+-----------------------
+ pgdata    | postgres | UTF8     | C       | C     |            | libc            | 
+ postgres  | postgres | UTF8     | C       | C     |            | libc            | 
+ template0 | postgres | UTF8     | C       | C     |            | libc            | =c/postgres          +
+           |          |          |         |       |            |                 | postgres=CTc/postgres
+ template1 | postgres | UTF8     | C       | C     |            | libc            | =c/postgres          +
+           |          |          |         |       |            |                 | postgres=CTc/postgres
+ testingdb | postgres | UTF8     | C       | C     |            | libc            | 
+(5 rows)
+
+testingdb=# CREATE DATABASE casestudyI
+testingdb-# ;
+CREATE DATABASE
+testingdb=# \c casestudyI
+connection to server at "localhost" (::1), port 5432 failed: could not initiate GSSAPI security context:  Miscellaneous failure (see text): unable to reach any KDC in realm BFL.COM, tried 0 KDCs (negative cache)
+connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "casestudyI" does not exist
+Previous connection kept
+testingdb=# \l
+                                             List of databases
+    Name    |  Owner   | Encoding | Collate | Ctype | ICU Locale | Locale Provider |   Access privileges   
+------------+----------+----------+---------+-------+------------+-----------------+-----------------------
+ casestudyi | postgres | UTF8     | C       | C     |            | libc            | 
+ pgdata     | postgres | UTF8     | C       | C     |            | libc            | 
+ postgres   | postgres | UTF8     | C       | C     |            | libc            | 
+ template0  | postgres | UTF8     | C       | C     |            | libc            | =c/postgres          +
+            |          |          |         |       |            |                 | postgres=CTc/postgres
+ template1  | postgres | UTF8     | C       | C     |            | libc            | =c/postgres          +
+            |          |          |         |       |            |                 | postgres=CTc/postgres
+ testingdb  | postgres | UTF8     | C       | C     |            | libc            | 
+(6 rows)
+
+testingdb=# \c casestudyi
+You are now connected to database "casestudyi" as user "postgres".
+casestudyi=# CREATE TABLE Users(uId,Fname,Iname,address,mobile,email,username,password);
+ERROR:  syntax error at or near ";"
+LINE 1: ...ers(uId,Fname,Iname,address,mobile,email,username,password);
+                                                                      ^
+casestudyi=# CREATE TABLE Users(uId INT NOT NULL,Fname TEXT NOT NULL,Iname TEXT NOT NULL,address TEXT,mobile TEXT,email TEXT,username TEXT NOT NULL,password TEXT,CONSTRAINTS uid_pk PRIMARY KEY(uId);
+casestudyi(# 
+casestudyi(# ;
+casestudyi(# )
+casestudyi-# ;
+ERROR:  syntax error at or near "("
+LINE 1: ... NOT NULL,password TEXT,CONSTRAINTS uid_pk PRIMARY KEY(uId);
+                                                                 ^
+casestudyi=# CREATE TABLE Users(uId INT NOT NULL,Fname TEXT NOT NULL,Iname TEXT NOT NULL,address TEXT,mobile TEXT,email TEXT,username TEXT NOT NULL,password TEXT,CONSTRAINTS uid_pk PRIMARY KEY(uId));
+ERROR:  syntax error at or near "("
+LINE 1: ...NOT NULL,password TEXT,CONSTRAINTS uid_pk PRIMARY KEY(uId));
+                                                                ^
+casestudyi=# CREATE TABLE Users(uId INT NOT NULL,Fname TEXT NOT NULL,Iname TEXT NOT NULL,address TEXT,mobile TEXT,email TEXT,username TEXT NOT NULL,password TEXT,CONSTRAINT uid_pk PRIMARY KEY (uId));
+CREATE TABLE
+casestudyi=# INSERT INTO Users values(1,Raj,Kumar,Pune,9959070819,raj.kumar@gmail.com,rk2102,rk2102),(2,Sujeet,Uma,Pune,7654321999,sujeet.uma@gmail.com,su2102,su2102),(3,Mahesh,Jeeva,Hyderabad,8500065400,mahesh.jeeva@gmail.com,mj2102,mj2102),(4,Ravi,Babu,Delhi,8759949392,ravi.babu@hotmail.com,rb2102,rb2102),(5,Rohith,Reddy,Mumbai,9100919293,rohith.reddy@gmail.com,rr2102,rr2102);
+ERROR:  column "raj" does not exist
+LINE 1: INSERT INTO Users values(1,Raj,Kumar,Pune,9959070819,raj.kum...
+                                   ^
+casestudyi=# INSERT INTO Users values (1,’Raj’,’Kumar’,’Pune’,’9959070819’,’raj.kumar@gmail.com’,’rk2102’,’rk2102’),(2,’Sujeet’,’Uma’,’Pune’,’7654321999’,’sujeet.uma@gmail.com’,’su2102’,’su2102’),(3,’Mahesh’,’Jeeva’,’Hyderabad’,’8500065400’,’mahesh.jeeva@gmail.com’,’mj2102’,’mj2102’),(4,’Ravi’,’Babu’,’Delhi’,’8759949392’,’ravi.babu@hotmail.com’,’rb2102’,’rb2102’),(5,’Rohith’,’Reddy’,’Mumbai’,’9100919293’,’rohith.reddy@gmail.com’,’rr2102’,’rr2102’);
+ERROR:  column "’raj’" does not exist
+LINE 1: INSERT INTO Users values (1,’Raj’,’Kumar’,’Pune’,’9959070819...
+                                    ^
+casestudyi=# INSERT INTO Users values(1,'Raj','Kumar','Pune','9959070819','raj.kumar@gmail.com','rk2102','rk2102'),(2,'Sujeet','Uma','Pune','7654321999','sujeet.uma@gmail.com','su2102','su2102'),(3,'Mahesh','Jeev
+rohith.reddy
+INSERT 0 5
+casestudyi=# CREATE TABLE Ref(refid INT NOT NULL,reffname TEXT NOT NULL,refiname TEXT NOT NULL,mobile TEXT,email TEXT,doref TEXT NOT NULL,refpnt INT,status TEXT,PRIMARY KEY (refid),CONSTRAINT fk_uId FORIEGN KEY(uId) REFERENCES Users(uId));
+ERROR:  syntax error at or near "FORIEGN"
+LINE 1: ...status TEXT,PRIMARY KEY (refid),CONSTRAINT fk_uId FORIEGN KE...
+                                                             ^
+casestudyi=# CREATE TABLE Ref(refid INT NOT NULL,reffname TEXT NOT NULL,refiname TEXT NOT NULL,mobile TEXT,email TEXT,doref TEXT NOT NULL,refpnt INT,status TEXT,PRIMARY KEY (refid),CONSTRAINT fk_uId FOREIGN KEY(uId) REFERENCES Users(uId));
+ERROR:  column "uid" referenced in foreign key constraint does not exist
+casestudyi=# CREATE TABLE Ref(refid INT NOT NULL,reffname TEXT NOT NULL,refiname TEXT NOT NULL,mobile TEXT,email TEXT,doref TEXT NOT NULL,refpnt INT,status TEXT,PRIMARY KEY (refid),CONSTRAINT fk_uId FOREIGN KEY(uId) REFERENCES Users(uId));
+ERROR:  column "uid" referenced in foreign key constraint does not exist
+casestudyi=# CREATE TABLE Ref(refid INT NOT NULL,reffname TEXT NOT NULL,refiname TEXT NOT NULL,mobile TEXT,email TEXT,doref TEXT NOT NULL,refpnt INT,status TEXT,PRIMARY KEY (refid),CONSTRAINT fk_uId FOREIGN KEY(uId) REFERENCES Users(uId));
+ERROR:  column "uid" referenced in foreign key constraint does not exist
+casestudyi=# CREATE TABLE Ref(refid INT NOT NULL,reffname TEXT NOT NULL,refiname TEXT NOT NULL,mobile TEXT,email TEXT,doref TEXT NOT NULL,refpnt INT,status TEXT,PRIMARY KEY (refid),CONSTRAINT fk_uId FOREIGN KEY(Fname) REFERENCES Users(Fname));
+ERROR:  column "fname" referenced in foreign key constraint does not exist
+casestudyi=# select * from Users
+casestudyi-# ;
+ uid | fname  | iname |  address  |   mobile   |         email          | username | password 
+-----+--------+-------+-----------+------------+------------------------+----------+----------
+   1 | Raj    | Kumar | Pune      | 9959070819 | raj.kumar@gmail.com    | rk2102   | rk2102
+   2 | Sujeet | Uma   | Pune      | 7654321999 | sujeet.uma@gmail.com   | su2102   | su2102
+   3 | Mahesh | Jeeva | Hyderabad | 8500065400 | mahesh.jeeva@gmail.com | mj2102   | mj2102
+   4 | Ravi   | Babu  | Delhi     | 8759949392 | ravi.babu@hotmail.com  | rb2102   | rb2102
+   5 | Rohith | Reddy | Mumbai    | 9100919293 | rohith.reddy@gmail.com | rr2102   | rr2102
+(5 rows)
+
+casestudyi=# casestudyi=# CREATE TABLE Users(uId INT NOT NULL,Fname TEXT NOT NULL,Iname TEXT NOT NULL,address TEXT,mobile TEXT,email TEXT,username TEXT NOT NULL,password TEXT,CONSTRAINT uid_pk PRIMARY KEY (uId));
+ERROR:  syntax error at or near "casestudyi"
+LINE 1: casestudyi=# CREATE TABLE Users(uId INT NOT NULL,Fname TEXT ...
+        ^
+casestudyi=# \d Users;
+                Table "public.users"
+  Column  |  Type   | Collation | Nullable | Default 
+----------+---------+-----------+----------+---------
+ uid      | integer |           | not null | 
+ fname    | text    |           | not null | 
+ iname    | text    |           | not null | 
+ address  | text    |           |          | 
+ mobile   | text    |           |          | 
+ email    | text    |           |          | 
+ username | text    |           | not null | 
+ password | text    |           |          | 
+Indexes:
+    "uid_pk" PRIMARY KEY, btree (uid)
+
+casestudyi=# CREATE TABLE Ref(refid INT NOT NULL,reffname TEXT NOT NULL,refiname TEXT NOT NULL,mobile TEXT,email TEXT,doref TEXT NOT NULL,refpnt INT,status TEXT,PRIMARY KEY (refid));
+CREATE TABLE
+casestudyi=# alter table Ref add uId INT NOT NULL;
+ALTER TABLE
+casestudyi=# alter table Ref add constraint fk_uId FOREIGN KEY(uId) REFRENCES Users(uId);
+ERROR:  syntax error at or near "REFRENCES"
+LINE 1: ... table Ref add constraint fk_uId FOREIGN KEY(uId) REFRENCES ...
+                                                             ^
+casestudyi=# alter table Ref add constraint fk_uId FOREIGN KEY(uId) REFeRENCES Users(uId);
+ALTER TABLE
+casestudyi=# \d Ref
+                 Table "public.ref"
+  Column  |  Type   | Collation | Nullable | Default 
+----------+---------+-----------+----------+---------
+ refid    | integer |           | not null | 
+ reffname | text    |           | not null | 
+ refiname | text    |           | not null | 
+ mobile   | text    |           |          | 
+ email    | text    |           |          | 
+ doref    | text    |           | not null | 
+ refpnt   | integer |           |          | 
+ status   | text    |           |          | 
+ uid      | integer |           | not null | 
+Indexes:
+    "ref_pkey" PRIMARY KEY, btree (refid)
+Foreign-key constraints:
+    "fk_uid" FOREIGN KEY (uid) REFERENCES users(uid)
+
+casestudyi=# INSERT INTO Ref values(1,'Raj','Kumar','9959070819','raj.kumar@gmail.com','21/04/23',50,'Pending');
+ERROR:  null value in column "uid" of relation "ref" violates not-null constraint
+DETAIL:  Failing row contains (1, Raj, Kumar, 9959070819, raj.kumar@gmail.com, 21/04/23, 50, Pending, null).
+casestudyi=# INSERT INTO Ref values(1,'Raj','Kumar','9959070819','raj.kumar@gmail.com','21/04/23',50,'Pending',3);
+INSERT 0 1
+casestudyi=# INSERT INTO Ref values(2,'Sujeet','Uma','7654321999','sujeet.uma@gmail.com','21/05/23',100,'Pending',4);
+INSERT 0 1
+casestudyi=# INSERT INTO Ref values(3,'Mahesh','Jeeva','8500065400','mahesh.jeeva@gmail.com','21/06/23',200,'Pending',2);
+INSERT 0 1
+casestudyi=# INSERT INTO Ref values(4,'Ravi','Babu','8759949392','ravi.babu@gmail.com','21/07/23',2000,'Accepted',3);
+INSERT 0 1
+casestudyi=# INSERT INTO Ref values(5,'Rohith','Reddy','9100919293','rohith.reddy@gmail.com','21/09/23',1200,'Accepted',3);
+INSERT 0 1
+casestudyi=# SELECT * FROM Ref
+casestudyi-# ;
+ refid | reffname | refiname |   mobile   |         email          |  doref   | refpnt |  status  | uid 
+-------+----------+----------+------------+------------------------+----------+--------+----------+-----
+     1 | Raj      | Kumar    | 9959070819 | raj.kumar@gmail.com    | 21/04/23 |     50 | Pending  |   3
+     2 | Sujeet   | Uma      | 7654321999 | sujeet.uma@gmail.com   | 21/05/23 |    100 | Pending  |   4
+     3 | Mahesh   | Jeeva    | 8500065400 | mahesh.jeeva@gmail.com | 21/06/23 |    200 | Pending  |   2
+     4 | Ravi     | Babu     | 8759949392 | ravi.babu@gmail.com    | 21/07/23 |   2000 | Accepted |   3
+     5 | Rohith   | Reddy    | 9100919293 | rohith.reddy@gmail.com | 21/09/23 |   1200 | Accepted |   3
+(5 rows)
+
+casestudyi=# CREATE TABLE Ref(cId INT NOT NULL,fname TEXT NOT NULL,lname TEXT NOT NULL,mobile TEXT,email TEXT,PRIMARY KEY (cId));
+ERROR:  relation "ref" already exists
+casestudyi=# CREATE TABLE custum(cId INT NOT NULL,fname TEXT NOT NULL,lname TEXT NOT NULL,mobile TEXT,email TEXT,PRIMARY KEY (cId));
+CREATE TABLE
+casestudyi=# INSERT INTO Ref values(101,'Raj','Kumar','9959070819','raj.kumar@gmail.com');
+ERROR:  null value in column "doref" of relation "ref" violates not-null constraint
+DETAIL:  Failing row contains (101, Raj, Kumar, 9959070819, raj.kumar@gmail.com, null, null, null, null).
+casestudyi=# INSERT INTO custum values(101,'Raj','Kumar','9959070819','raj.kumar@gmail.com');
+INSERT 0 1
+casestudyi=# INSERT INTO custum values(102,'Sujeet','Uma','7654321999','sujeet.uma@gmail.com');
+INSERT 0 1
+casestudyi=# INSERT INTO custum values(103,'Mahesh','Jeeva','8500065400','mahesh.jeeva@gmail.com');
+INSERT 0 1
+casestudyi=# INSERT INTO custum values(104,'Ravi','Babu','8759949392','ravi.babu@gmail.com');
+INSERT 0 1
+casestudyi=# INSERT INTO custum values(105,'Rohith','Reddy','9100919293','rohith.reddy@gmail.com');
+INSERT 0 1
+casestudyi=# SELECT * FROM custum;
+ cid | fname  | lname |   mobile   |         email          
+-----+--------+-------+------------+------------------------
+ 101 | Raj    | Kumar | 9959070819 | raj.kumar@gmail.com
+ 102 | Sujeet | Uma   | 7654321999 | sujeet.uma@gmail.com
+ 103 | Mahesh | Jeeva | 8500065400 | mahesh.jeeva@gmail.com
+ 104 | Ravi   | Babu  | 8759949392 | ravi.babu@gmail.com
+ 105 | Rohith | Reddy | 9100919293 | rohith.reddy@gmail.com
+(5 rows)
+
+casestudyi=# CREATE TABLE bdet(cId INT NOT NULL,uId INT NOT NULL,purdate TEXT NOT NULL,proname TEXT);
+CREATE TABLE
+casestudyi=# DROP TABLE bdet
+casestudyi-# CREATE TABLE bdet(cid INT NOT NULL,uId INT NOT NULL,purdate TEXT NOT NULL,proname TEXT);
+ERROR:  syntax error at or near "CREATE"
+LINE 2: CREATE TABLE bdet(cid INT NOT NULL,uId INT NOT NULL,purdate ...
+        ^
+casestudyi=# DROP TABLE bdet
+CREATE TABLE bdet(cid INT NOT NULL,uId INT NOT NULL,purdate TEXT NOT NULL,proname TEXT);
+ERROR:  syntax error at or near "CREATE"
+LINE 2: CREATE TABLE bdet(cid INT NOT NULL,uId INT NOT NULL,purdate ...
+        ^
+casestudyi=# ;
+casestudyi=# DROP TABLE bdet;
+DROP TABLE
+casestudyi=# CREATE TABLE bdet(cid INT NOT NULL,uId INT NOT NULL,purdate TEXT NOT NULL,proname TEXT);
+CREATE TABLE
+casestudyi=# alter table bdet add constraint fk_cid FOREIGN KEY(cid) REFeRENCES Users(cid);
+ERROR:  column "cid" referenced in foreign key constraint does not exist
+casestudyi=# alter table bdet add constraint fk_cid FOREIGN KEY(cid) REFeRENCES custum(cid);
+ALTER TABLE
+casestudyi=# INSERT INTO bdet values(2,1,'21/05/22','Fan'),(3,2,'21/06/22','Iphone 14'),(4,3,'21/07/22','Headphones'),(5,4,'21/08/22','Laptop'),(1,5,'21/09/22','Human');
+ERROR:  insert or update on table "bdet" violates foreign key constraint "fk_cid"
+DETAIL:  Key (cid)=(2) is not present in table "custum".
+casestudyi=# INSERT INTO bdet values(102,1,'21/05/22','Fan'),(103,2,'21/06/22','Iphone 14'),(104,3,'21/07/22','Headphones'),(105,4,'21/08/22','Laptop'),(101,5,'21/09/22','Human');
+INSERT 0 5
+casestudyi=# \d bdet
+                Table "public.bdet"
+ Column  |  Type   | Collation | Nullable | Default 
+---------+---------+-----------+----------+---------
+ cid     | integer |           | not null | 
+ uid     | integer |           | not null | 
+ purdate | text    |           | not null | 
+ proname | text    |           |          | 
+Foreign-key constraints:
+    "fk_cid" FOREIGN KEY (cid) REFERENCES custum(cid)
+
+casestudyi=# \d custum
+               Table "public.custum"
+ Column |  Type   | Collation | Nullable | Default 
+--------+---------+-----------+----------+---------
+ cid    | integer |           | not null | 
+ fname  | text    |           | not null | 
+ lname  | text    |           | not null | 
+ mobile | text    |           |          | 
+ email  | text    |           |          | 
+Indexes:
+    "custum_pkey" PRIMARY KEY, btree (cid)
+Referenced by:
+    TABLE "bdet" CONSTRAINT "fk_cid" FOREIGN KEY (cid) REFERENCES custum(cid)
+
+casestudyi=# \d Ref
+                 Table "public.ref"
+  Column  |  Type   | Collation | Nullable | Default 
+----------+---------+-----------+----------+---------
+ refid    | integer |           | not null | 
+ reffname | text    |           | not null | 
+ refiname | text    |           | not null | 
+ mobile   | text    |           |          | 
+ email    | text    |           |          | 
+ doref    | text    |           | not null | 
+ refpnt   | integer |           |          | 
+ status   | text    |           |          | 
+ uid      | integer |           | not null | 
+Indexes:
+    "ref_pkey" PRIMARY KEY, btree (refid)
+Foreign-key constraints:
+    "fk_uid" FOREIGN KEY (uid) REFERENCES users(uid)
+
+casestudyi=# \d Users
+                Table "public.users"
+  Column  |  Type   | Collation | Nullable | Default 
+----------+---------+-----------+----------+---------
+ uid      | integer |           | not null | 
+ fname    | text    |           | not null | 
+ iname    | text    |           | not null | 
+ address  | text    |           |          | 
+ mobile   | text    |           |          | 
+ email    | text    |           |          | 
+ username | text    |           | not null | 
+ password | text    |           |          | 
+Indexes:
+    "uid_pk" PRIMARY KEY, btree (uid)
+Referenced by:
+    TABLE "ref" CONSTRAINT "fk_uid" FOREIGN KEY (uid) REFERENCES users(uid)
+
+casestudyi=# SELECT * FROM Ref
+casestudyi-# ;
+ refid | reffname | refiname |   mobile   |         email          |  doref   | refpnt |  status  | uid 
+-------+----------+----------+------------+------------------------+----------+--------+----------+-----
+     1 | Raj      | Kumar    | 9959070819 | raj.kumar@gmail.com    | 21/04/23 |     50 | Pending  |   3
+     2 | Sujeet   | Uma      | 7654321999 | sujeet.uma@gmail.com   | 21/05/23 |    100 | Pending  |   4
+     3 | Mahesh   | Jeeva    | 8500065400 | mahesh.jeeva@gmail.com | 21/06/23 |    200 | Pending  |   2
+     4 | Ravi     | Babu     | 8759949392 | ravi.babu@gmail.com    | 21/07/23 |   2000 | Accepted |   3
+     5 | Rohith   | Reddy    | 9100919293 | rohith.reddy@gmail.com | 21/09/23 |   1200 | Accepted |   3
+(5 rows)
+
+casestudyi=# SELECT * FROM Users
+casestudyi-# ;
+ uid | fname  | iname |  address  |   mobile   |         email          | username | password 
+-----+--------+-------+-----------+------------+------------------------+----------+----------
+   1 | Raj    | Kumar | Pune      | 9959070819 | raj.kumar@gmail.com    | rk2102   | rk2102
+   2 | Sujeet | Uma   | Pune      | 7654321999 | sujeet.uma@gmail.com   | su2102   | su2102
+   3 | Mahesh | Jeeva | Hyderabad | 8500065400 | mahesh.jeeva@gmail.com | mj2102   | mj2102
+   4 | Ravi   | Babu  | Delhi     | 8759949392 | ravi.babu@hotmail.com  | rb2102   | rb2102
+   5 | Rohith | Reddy | Mumbai    | 9100919293 | rohith.reddy@gmail.com | rr2102   | rr2102
+(5 rows)
+
+casestudyi=# SELECT * FROM custum
+casestudyi-# ;
+ cid | fname  | lname |   mobile   |         email          
+-----+--------+-------+------------+------------------------
+ 101 | Raj    | Kumar | 9959070819 | raj.kumar@gmail.com
+ 102 | Sujeet | Uma   | 7654321999 | sujeet.uma@gmail.com
+ 103 | Mahesh | Jeeva | 8500065400 | mahesh.jeeva@gmail.com
+ 104 | Ravi   | Babu  | 8759949392 | ravi.babu@gmail.com
+ 105 | Rohith | Reddy | 9100919293 | rohith.reddy@gmail.com
+(5 rows)
+
+casestudyi=# SELECT * FROM bdet;
+ cid | uid | purdate  |  proname   
+-----+-----+----------+------------
+ 102 |   1 | 21/05/22 | Fan
+ 103 |   2 | 21/06/22 | Iphone 14
+ 104 |   3 | 21/07/22 | Headphones
+ 105 |   4 | 21/08/22 | Laptop
+ 101 |   5 | 21/09/22 | Human
+(5 rows)
+
+  [Bookmarked 17-Jan-2023 at 6:47:06 PM]
+  [Bookmarked 17-Jan-2023 at 6:47:20 PM]
+casestudyi=# SELECT uId,COUNT(uId) FROM Ref GROUP BY COUNT(uId);
+ERROR:  aggregate functions are not allowed in GROUP BY
+LINE 1: SELECT uId,COUNT(uId) FROM Ref GROUP BY COUNT(uId);
+                                                ^
+casestudyi=# SELECT uId,COUNT(uId) FROM Ref GROUP BY uId;
+ uid | count 
+-----+-------
+   3 |     3
+   4 |     1
+   2 |     1
+(3 rows)
+
+casestudyi=# SELECT uId,COUNT(uId) FROM Ref;
+ERROR:  column "ref.uid" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: SELECT uId,COUNT(uId) FROM Ref;
+               ^
+casestudyi=# SELECT uId,COUNT(uId) FROM Ref;
+ERROR:  column "ref.uid" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: SELECT uId,COUNT(uId) FROM Ref;
+               ^
+casestudyi=# select uId, sum(refpnt) from Ref group by uId;
+ uid | sum  
+-----+------
+   3 | 3250
+   4 |  100
+   2 |  200
+(3 rows)
+
+casestudyi=# select fname,lname,mobile from custum where cid=(select cid from bdet where purdate='21/09/2022');
+ fname | lname | mobile 
+-------+-------+--------
+(0 rows)
+
+casestudyi=# select fname,lname,mobile from custum where cid=(select cid from bdet where purdate='21/09/22');
+ fname | lname |   mobile   
+-------+-------+------------
+ Raj   | Kumar | 9959070819
+(1 row)
+
+casestudyi=# select * from custum where cid=(select cid from bdet where proname='Iphone 14’);
+casestudyi'# ');
+ cid | fname | lname | mobile | email 
+-----+-------+-------+--------+-------
+(0 rows)
+
+casestudyi=# select * from custum where cid=(select cid from bdet where proname='Iphone 14');
+ cid | fname  | lname |   mobile   |         email          
+-----+--------+-------+------------+------------------------
+ 103 | Mahesh | Jeeva | 8500065400 | mahesh.jeeva@gmail.com
+(1 row)
+
+casestudyi=# create view userview as select fname,lname,mobile,email from Users;
+ERROR:  column "lname" does not exist
+LINE 1: create view userview as select fname,lname,mobile,email from...
+                                             ^
+HINT:  Perhaps you meant to reference the column "users.fname" or the column "users.iname".
+casestudyi=# create view userview as select fname,iname,mobile,email from Users;
+CREATE VIEW
+casestudyi=# select * from userview order by email asc;
+ fname  | iname |   mobile   |         email          
+--------+-------+------------+------------------------
+ Mahesh | Jeeva | 8500065400 | mahesh.jeeva@gmail.com
+ Raj    | Kumar | 9959070819 | raj.kumar@gmail.com
+ Ravi   | Babu  | 8759949392 | ravi.babu@hotmail.com
+ Rohith | Reddy | 9100919293 | rohith.reddy@gmail.com
+ Sujeet | Uma   | 7654321999 | sujeet.uma@gmail.com
+(5 rows)
+
+casestudyi=# select * from userview order by email desc;
+ fname  | iname |   mobile   |         email          
+--------+-------+------------+------------------------
+ Sujeet | Uma   | 7654321999 | sujeet.uma@gmail.com
+ Rohith | Reddy | 9100919293 | rohith.reddy@gmail.com
+ Ravi   | Babu  | 8759949392 | ravi.babu@hotmail.com
+ Raj    | Kumar | 9959070819 | raj.kumar@gmail.com
+ Mahesh | Jeeva | 8500065400 | mahesh.jeeva@gmail.com
+(5 rows)
+
+casestudyi=# 
