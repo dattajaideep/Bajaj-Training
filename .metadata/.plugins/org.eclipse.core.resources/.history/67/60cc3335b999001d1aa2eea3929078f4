@@ -1,0 +1,49 @@
+package finserv.day3.taskexceptions;
+
+import java.io.*;
+
+public class filemerge {
+    public static void main(String[] args) {
+        // FileInputStreams to read from the two files
+        FileInputStream file1 = null, file2 = null;
+        // FileOutputStream to write to the third file
+        FileOutputStream outputFile = null;
+        
+        try {
+            // Creating the FileInputStreams to read from the two files
+            file1 = new FileInputStream("file1.txt");
+            file2 = new FileInputStream("file2.txt");
+            // Creating the FileOutputStream to write to the third file
+            outputFile = new FileOutputStream("output.txt");
+            
+            // variables to store the read bytes
+            int byte1, byte2;
+            
+            // Loop to read from the two files and write to the third file
+            while ((byte1 = file1.read()) != -1 && (byte2 = file2.read()) != -1) {
+                // Write the first byte from file1 to output file
+                outputFile.write(byte1);
+                // Write the first byte from file2 to output file
+                outputFile.write(byte2);
+            }
+            
+            // Success message
+            System.out.println("Files merged successfully!");
+        } catch (IOException e) {
+            // Handle the exception
+            e.printStackTrace();
+        } finally {
+            // Close the FileInputStreams and FileOutputStream in finally block to release resources
+            try {
+                if (file1 != null)
+                    file1.close();
+                if (file2 != null)
+                    file2.close();
+                if (outputFile != null)
+                    outputFile.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}

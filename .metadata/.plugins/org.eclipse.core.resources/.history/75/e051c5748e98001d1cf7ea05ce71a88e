@@ -1,0 +1,18 @@
+package com.finserv.day4.collections;
+
+
+public class MyMap {
+	public static void main(String[] args) {
+		
+	}
+	public void myMaps() {
+		Map<Integer, String> Hmaps=new HashMap<Interger,String>();
+		Map.put(111,"Mumbai");
+		Map.put(112,"Hyderabad");
+		Map.put(103,"Pune");
+		Set set=map.entrySet();//It is getting the set representation of the map in "set".
+		Iterator itr=set.iterator();
+		while(itr.hasNext()){
+			Map.Entry entry(Map.Entry)itr.next();
+		}
+}

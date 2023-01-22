@@ -1,0 +1,25 @@
+package finserv.day3.taskexceptions;
+
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.Scanner;
+import java.util.Set;
+
+public class Shop {
+private static ArrayList<Integer> Items=new ArrayList<Integer>();
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner sc=new Scanner(System.in);
+		
+	}
+}
+
+class World{
+	public static Set<String> setCreate(String Id,String Name,String price) {
+		Set<String> set=new LinkedHashSet<String>();
+		set.add(Id);
+		set.add(Name);
+		set.add(price);
+		return set;
+	}
+}

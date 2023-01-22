@@ -1,0 +1,31 @@
+package com.finserv.Day1.basics;
+import java.util.*;
+public class primeandpalin {
+	public static void main(String[]args)
+	{
+		Scanner sc=new Scanner(System.in);
+		int a=sc.nextInt();
+		sc.close();
+		System.out.println("Prime: "+primo(a));
+		System.out.println("Plaindrome: "+palin(a));
+	}
+	public static boolean primo(int x) {
+		if(x%2==0 && x!=2)
+			return false;
+		return true;
+	}
+	public static boolean palin(int x) {
+		int sum=0;
+		int y=x;
+		while(x>0) {
+			int tmp=x%10;
+			sum=(sum*10)+tmp;
+			x=x/10;
+		}
+		System.out.println(sum);
+		if(y==sum)
+			return true;
+		else
+			return false;
+	}
+}

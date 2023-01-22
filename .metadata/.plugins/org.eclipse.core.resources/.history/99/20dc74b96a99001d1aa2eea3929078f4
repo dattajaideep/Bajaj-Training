@@ -1,0 +1,10 @@
+package finserv.day3.collections;
+
+public class MyVector {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

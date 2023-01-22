@@ -1,0 +1,45 @@
+package finserv.day3.taskexceptions;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Shop {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		ArrayList<Integer> Items=new ArrayList<Integer>();
+		Scanner sc=new Scanner(System.in);
+		
+	}
+
+}
+
+class World{
+	int Id;
+	String Name;
+	int price;
+	public World(int Id,String Name,int price) {
+		this.Id=Id;
+		this.Name=Name;
+		this.price=price;
+	}
+	public int getId() {
+		return Id;
+	}
+	public void setId(int id) {
+		Id = id;
+	}
+	public String getName() {
+		return Name;
+	}
+	public void setName(String name) {
+		Name = name;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	
+}

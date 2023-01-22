@@ -1,0 +1,39 @@
+package finserv.day4.comparable;
+
+import java.util.Arrays;
+import java.util.List;
+
+class Person implements Comparable<Person> {
+    private String name;
+    private int age;
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    public String getName() {
+        return name;
+    }
+    public int getAge() {
+        return age;
+    }
+    @Override
+    public int compareTo(Person other) {
+        return Integer.compare(this.age, other.age);
+    }
+}
+
+public class comparable {
+    public static void main(String[] args) {
+        List<Person> people = Arrays.asList(
+            new Person("John", 30),
+            new Person("Jane", 25),
+            new Person("Bob", 35)
+        );
+
+        people.sort(null);
+
+        for (Person p : people) {
+            System.out.println(p.getName() + " - " + p.getAge());
+        }
+    }
+}

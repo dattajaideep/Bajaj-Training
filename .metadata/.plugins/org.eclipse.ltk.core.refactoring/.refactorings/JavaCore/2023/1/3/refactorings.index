@@ -1,0 +1,69 @@
+1673932486908	Move compilation unit
+1673932588359	Move file
+1673932697187	Move compilation unit
+1673938002910	Rename compilation unit 'swap.java'
+1673938072485	Rename type 'typecasting'
+1673938374093	Delete element
+1673938379898	Delete element
+1673938598821	Copy compilation units
+1673938610933	Delete elements
+1673938618753	Delete element
+1673938677449	Move compilation units
+1673950282191	Rename type 'Oneprog'
+1674014757427	Delete element
+1674042713999	Rename package 'com.javaruns.basics'
+1674060923603	Rename package 'com.javaruns.basics.Day3'
+1674061244335	Rename package 'com.javaruns.basics.Day1'
+1674062986961	Delete element
+1674063033693	Rename package 'com.unext.shape'
+1674063106701	Rename package 'com.unext.bean'
+1674063144301	Rename package 'com.unext.relations'
+1674063161666	Copy package
+1674063181019	Delete element
+1674063189234	Delete element
+1674063210396	Rename package 'com.unext.bean'
+1674063240868	Rename package 'com.unext.bean.Day2'
+1674063269493	Rename package 'com.javareruns.basics.Day1'
+1674063283320	Rename package 'com.unext.exception'
+1674063297708	Rename package 'com.unext.inheritance'
+1674063311515	Rename package 'com.unext.interfaces'
+1674063327118	Rename package 'com.unext.shape.task'
+1674125530294	Rename type 'Mylist'
+1674148957642	Delete element
+1674190175961	Delete element
+1674196331711	Rename package 'com.Day1.basics'
+1674196350870	Rename package 'com.day2.exception'
+1674196368589	Rename package 'com.day2.inheritance'
+1674196405195	Rename package 'com.day2.interfaces'
+1674196417229	Rename package 'com.day2.relations'
+1674196491502	Rename package 'Finserv.Day1.basics'
+1674196502610	Rename package 'Finserv.day2.exception'
+1674196512682	Rename package 'Finserv.day2.inheritance'
+1674196522623	Rename package 'Finserv.day2.interfaces'
+1674196535775	Rename package 'Finserv.day2.relations'
+1674196552323	Rename package 'com.day2.shape.task'
+1674196564705	Rename package 'com.day3.collections'
+1674196577174	Rename package 'com.day3.taskexceptions'
+1674196588047	Rename package 'com.day4.collections'
+1674197313031	Delete element
+1674198182240	Rename type 'myset'
+1674198194346	Rename compilation unit 'mapandset.java'
+1674199180080	Rename package 'com.finserv.Day1.basics'
+1674199207475	Rename package 'com.finserv.day2.exception'
+1674199217215	Rename package 'com.finserv.day2.inheritance'
+1674199227799	Rename package 'com.finserv.day2.interfaces'
+1674199238226	Rename package 'com.finserv.day2.relations'
+1674199246501	Rename package 'com.finserv.day2.shape.task'
+1674199256521	Rename package 'com.finserv.day3.collections'
+1674199264885	Rename package 'com.finserv.day3.taskexceptions'
+1674199274861	Rename package 'com.finserv.day4.collections'
+1674325441782	Rename package 'finserv.Day1.basics'
+1674325460619	Rename package 'finserv.day2.exception'
+1674325477727	Rename package 'finserv.day2.inheritance'
+1674325500556	Rename package 'finserv.day2.interfaces'
+1674325513329	Rename package 'finserv.day2.relations'
+1674325527261	Rename package 'finserv.day2.shape.task'
+1674325569372	Rename package 'finserv.day3.collections'
+1674325625920	Rename package 'finserv.day3.taskexceptions'
+1674325638361	Rename package 'finserv.day4.collections'
+1674325649667	Rename package 'finserv.day4.interfaces'

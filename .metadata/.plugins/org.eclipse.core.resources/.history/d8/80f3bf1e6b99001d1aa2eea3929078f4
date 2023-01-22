@@ -1,0 +1,13 @@
+package finserv.day3.collections;
+
+import java.util.Vector;
+
+public class MyVector {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Vector<String> vector=new Vector<String>();
+		
+	}
+
+}

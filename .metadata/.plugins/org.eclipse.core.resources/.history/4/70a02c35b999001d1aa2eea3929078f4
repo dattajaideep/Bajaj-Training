@@ -1,0 +1,7 @@
+package finserv.day3.taskexceptions;
+
+public class EmptyCartException extends Exception{
+	EmptyCartException(String msg){
+		super(msg);
+	}
+}

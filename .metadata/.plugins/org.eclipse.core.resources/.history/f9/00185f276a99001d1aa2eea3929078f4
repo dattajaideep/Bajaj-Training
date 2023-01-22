@@ -1,0 +1,7 @@
+package finserv.day3.collections;
+
+public class MyLinkedlist {
+	public static void main(String[] args) {
+		
+	}
+}

@@ -1,0 +1,10 @@
+package finserv.day4.interfaces;
+
+public class MyLambda {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,36 @@
+package finserv.day3.taskexceptions;
+
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.Set;
+
+public class Shop {
+private static ArrayList<Integer> Items=new ArrayList<Integer>();
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		World w=new World();
+		Scanner sc=new Scanner(System.in);
+		String Id,price,Name;
+		List<Set<String>> list=new LinkedList<Set<String>>();
+		boolean b=sc.nextBoolean();
+		while(b==true) {
+			Id=sc.next();
+			Name=sc.next();
+			price=sc.next();
+			list.add(w.setCreate(Id,Name,price,b));
+		}
+	}
+}
+
+class World{
+	public static Set<String> setCreate(String Id,String Name,String price,boolean b) {
+		Set<String> set=new LinkedHashSet<String>();
+		set.add(Id);
+		set.add(Name);
+		set.add(price);
+		return set;
+	}
+}

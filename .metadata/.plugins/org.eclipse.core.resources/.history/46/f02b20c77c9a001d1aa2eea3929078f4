@@ -1,0 +1,10 @@
+package finserv.dayfour.defaultandstatic;
+
+public class staticexapmple {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

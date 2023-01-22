@@ -1,0 +1,6 @@
+package finserv.dayfour.interfaces;
+@FunctionalInterface
+interface Operation {
+	
+	int addition(int a,int b);
+}

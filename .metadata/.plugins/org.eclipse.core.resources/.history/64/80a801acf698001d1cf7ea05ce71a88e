@@ -1,0 +1,4 @@
+package finserv.day4.interfaces;
+public class Operation {
+	public void addition(int a,int b);
+}

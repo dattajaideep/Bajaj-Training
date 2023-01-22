@@ -1,4 +1,4 @@
-package finserv.day4.comparable;
+package finserv.dayfour.comparable;
 
 import java.util.Arrays;
 import java.util.List;

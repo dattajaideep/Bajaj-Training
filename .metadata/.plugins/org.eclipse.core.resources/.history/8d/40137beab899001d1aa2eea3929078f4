@@ -1,0 +1,5 @@
+package finserv.day2.interfaces;
+
+interface Addition{
+	public void addition(int i, int j);
+}
