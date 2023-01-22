@@ -7,7 +7,7 @@ public class TestOperationDemo {
 		Operation ref;
 		Demo obj=new Demo();
 		ref=obj;
-		ref.addition
+		ref.addition(2,3);
 	}
 
 }

@@ -6,10 +6,10 @@ public class Demo implements Operation{
 		int sum=num1+num2;
 		System.out.println("Addition = "+sum);
 	}
-	@Override
 	public int division(int num1,int num2) {
 		return num1+num2+10;
 	}
+	
 	static int mul(int num1,int num2) {
 		return num1+num2;
 	}

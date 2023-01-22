@@ -1,6 +1,6 @@
 package finserv.dayfour.interfaces;
 @FunctionalInterface
-public abstract class Operation {
+interface Operation {
 	
-	public abstract void addition(int a,int b);
+	void addition(int a,int b);
 }
