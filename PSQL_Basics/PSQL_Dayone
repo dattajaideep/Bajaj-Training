@@ -1,0 +1,911 @@
+
+#Day 1
+
+
+Server [localhost]: 
+Database [postgres]: 
+Port [5432]: 
+Username [postgres]: 
+Password for user postgres: 
+psql (15.1)
+Type "help" for help.
+
+
+postgres=# CREATE DATABASE pgdata;
+CREATE DATABASE
+postgres=# \list 
+                                            List of databases
+   Name    |  Owner   | Encoding | Collate | Ctype | ICU Locale | Locale Provider |   Access privileges   
+-----------+----------+----------+---------+-------+------------+-----------------+-----------------------
+ pgdata    | postgres | UTF8     | C       | C     |            | libc            | 
+ postgres  | postgres | UTF8     | C       | C     |            | libc            | 
+ template0 | postgres | UTF8     | C       | C     |            | libc            | =c/postgres          +
+           |          |          |         |       |            |                 | postgres=CTc/postgres
+ template1 | postgres | UTF8     | C       | C     |            | libc            | =c/postgres          +
+           |          |          |         |       |            |                 | postgres=CTc/postgres
+(4 rows)
+
+
+postgres=# \list
+                                            List of databases
+   Name    |  Owner   | Encoding | Collate | Ctype | ICU Locale | Locale Provider |   Access privileges   
+-----------+----------+----------+---------+-------+------------+-----------------+-----------------------
+ pgdata    | postgres | UTF8     | C       | C     |            | libc            | 
+ postgres  | postgres | UTF8     | C       | C     |            | libc            | 
+ template0 | postgres | UTF8     | C       | C     |            | libc            | =c/postgres          +
+           |          |          |         |       |            |                 | postgres=CTc/postgres
+ template1 | postgres | UTF8     | C       | C     |            | libc            | =c/postgres          +
+           |          |          |         |       |            |                 | postgres=CTc/postgres
+(4 rows)
+
+postgres=# \l
+                                            List of databases
+   Name    |  Owner   | Encoding | Collate | Ctype | ICU Locale | Locale Provider |   Access privileges   
+-----------+----------+----------+---------+-------+------------+-----------------+-----------------------
+ pgdata    | postgres | UTF8     | C       | C     |            | libc            | 
+ postgres  | postgres | UTF8     | C       | C     |            | libc            | 
+ template0 | postgres | UTF8     | C       | C     |            | libc            | =c/postgres          +
+           |          |          |         |       |            |                 | postgres=CTc/postgres
+ template1 | postgres | UTF8     | C       | C     |            | libc            | =c/postgres          +
+           |          |          |         |       |            |                 | postgres=CTc/postgres
+(4 rows)
+
+postgres=# \dt
+Did not find any relations.
+
+postgres=# \c pgdata
+You are now connected to database "pgdata" as user "postgres".
+
+pgdata=# \d pgtable
+Did not find any relation named "pgtable".
+
+pgdata=# \dt
+Did not find any relations.
+
+pgdata=# CREATE TABLE emp(eid INT PRIMARY KEY NOT NULL, ename TEXT NOT NULL, salary REAL);
+CREATE TABLE
+
+pgdata=# \d
+        List of relations
+ Schema | Name | Type  |  Owner   
+--------+------+-------+----------
+ public | emp  | table | postgres
+(1 row)
+
+pgdata=# \d emp;
+                Table "public.emp"
+ Column |  Type   | Collation | Nullable | Default 
+--------+---------+-----------+----------+---------
+ eid    | integer |           | not null | 
+ ename  | text    |           | not null | 
+ salary | real    |           |          | 
+Indexes:
+    "emp_pkey" PRIMARY KEY, btree (eid)
+
+pgdata-# \d 
+        List of relations
+ Schema | Name | Type  |  Owner   
+--------+------+-------+----------
+ public | emp  | table | postgres
+(1 row)
+
+pgdata=# INSERT INTO emp(eid,ename,salary) values(101,'Sachin',40);
+INSERT 0 1
+pgdata=# INSERT INTO emp(eid,ename,salary) values(102,'Sarav',50);
+INSERT 0 1
+
+pgdata=# \d
+        List of relations
+ Schema | Name | Type  |  Owner   
+--------+------+-------+----------
+ public | emp  | table | postgres
+(1 row)
+
+pgdata=# \d emp
+                Table "public.emp"
+ Column |  Type   | Collation | Nullable | Default 
+--------+---------+-----------+----------+---------
+ eid    | integer |           | not null | 
+ ename  | text    |           | not null | 
+ salary | real    |           |          | 
+Indexes:
+    "emp_pkey" PRIMARY KEY, btree (eid)
+
+pgdata=# INSERT INTO emp VALUES(103,'Korav',90);
+INSERT 0 1
+
+pgdata=# SELECT * FROM emp;
+ eid | ename  | salary 
+-----+--------+--------
+ 101 | Sachin |     40
+ 102 | Sarav  |     50
+ 103 | Korav  |     90
+(3 rows)
+
+pgdata=# INSERT INTO emp VALUES(105,'eppuduorav',10);
+INSERT 0 1
+
+pgdata=# SELECT * FROM emp;
+ eid |   ename    | salary 
+-----+------------+--------
+ 101 | Sachin     |     40
+ 102 | Sarav      |     50
+ 103 | Korav      |     90
+ 105 | eppuduorav |     10
+(4 rows)
+
+pgdata=# INSERT INTO emp values(104,'Jaideep',100),(106,'Fuarav',30),(107,'takur',20);
+INSERT 0 3
+
+pgdata=# SELECT * FROM emp;
+ eid |   ename    | salary 
+-----+------------+--------
+ 101 | Sachin     |     40
+ 102 | Sarav      |     50
+ 103 | Korav      |     90
+ 105 | eppuduorav |     10
+ 104 | Jaideep    |    100
+ 106 | Fuarav     |     30
+ 107 | takur      |     20
+(7 rows)
+
+pgdata=# DELETE FROM emp WHERE eid=104;
+DELETE 1
+pgdata=# UPDATE emp set ename='Jaideep',salary=100 WHERE eid=103;
+UPDATE 1
+pgdata=# SELECT * FROM emp;
+ eid |   ename    | salary 
+-----+------------+--------
+ 101 | Sachin     |     40
+ 102 | Sarav      |     50
+ 105 | eppuduorav |     10
+ 106 | Fuarav     |     30
+ 107 | takur      |     20
+ 103 | Jaideep    |    100
+(6 rows)
+
+pgdata=# UPDATE emp set eid=104 WHERE salary=10;
+UPDATE 1
+
+pgdata=# UPDATE emp set eid=105 WHERE salary=30;
+UPDATE 1
+
+pgdata=# UPDATE emp set eid=106 WHERE salary=20;
+UPDATE 1
+
+pgdata=# SELECT * FROM emp;
+ eid |   ename    | salary 
+-----+------------+--------
+ 101 | Sachin     |     40
+ 102 | Sarav      |     50
+ 103 | Jaideep    |    100
+ 104 | eppuduorav |     10
+ 105 | Fuarav     |     30
+ 106 | takur      |     20
+(6 rows)
+
+pgdata=# UPDATE emp set ename='Jaideep' WHERE salary=20 OR salary=30 OR salary=10;
+UPDATE 3
+
+pgdata=# SELECT * FROM emp;
+ eid |  ename  | salary 
+-----+---------+--------
+ 101 | Sachin  |     40
+ 102 | Sarav   |     50
+ 103 | Jaideep |    100
+ 104 | Jaideep |     10
+ 105 | Jaideep |     30
+ 106 | Jaideep |     20
+(6 rows)
+
+pgdata=# UPDATE emp set ename='Yaswenth' WHERE eid=1 OR eid=2;
+UPDATE 0
+pgdata=# UPDATE emp set ename='Yaswenth' WHERE eid=101 OR eid=102;
+UPDATE 2
+pgdata=# SELECT * FROM emp;
+ eid |  ename   | salary 
+-----+----------+--------
+ 103 | Jaideep  |    100
+ 104 | Jaideep  |     10
+ 105 | Jaideep  |     30
+ 106 | Jaideep  |     20
+ 101 | Yaswenth |     40
+ 102 | Yaswenth |     50
+(6 rows)
+
+pgdata=# SELECT * FROM emp WHERE salary>50;
+ eid |  ename  | salary 
+-----+---------+--------
+ 103 | Jaideep |    100
+(1 row)
+
+pgdata=# DELETE FROM emp WHERE salary>50;
+DELETE 1
+pgdata=# SELECT * FROM emp WHERE ename='Jaideep';
+ eid |  ename  | salary 
+-----+---------+--------
+ 104 | Jaideep |     10
+ 105 | Jaideep |     30
+ 106 | Jaideep |     20
+(3 rows)
+
+pgdata=# DELETE FROM emp WHERE ename='Yaswenth';
+DELETE 2
+pgdata=# SELECT * FROM emp;
+ eid |  ename  | salary 
+-----+---------+--------
+ 104 | Jaideep |     10
+ 105 | Jaideep |     30
+ 106 | Jaideep |     20
+(3 rows)
+
+pgdata=# INSERT INTO emp values(101,'SARAV',40),(102,'SARAV',50),(103,'SARAV',60),(107,'USAF',70.003),(108,'USAF',0);
+INSERT 0 5
+pgdata=# INSERT INTO emp values(109,'USAF',120),(110,'TAKUR',110),(111,'TAKUR',100),(112,'TAKUR',90),(113,'JAIDEEP',80);
+INSERT 0 5
+pgdata=# SELECT * FROM emp;
+ eid |  ename  | salary 
+-----+---------+--------
+ 104 | Jaideep |     10
+ 105 | Jaideep |     30
+ 106 | Jaideep |     20
+ 101 | SARAV   |     40
+ 102 | SARAV   |     50
+ 103 | SARAV   |     60
+ 107 | USAF    | 70.003
+ 108 | USAF    |      0
+ 109 | USAF    |    120
+ 110 | TAKUR   |    110
+ 111 | TAKUR   |    100
+ 112 | TAKUR   |     90
+ 113 | JAIDEEP |     80
+(13 rows)
+
+pgdata=# SELECT LOWER(ename) FROM emp;
+  lower  
+---------
+ jaideep
+ jaideep
+ jaideep
+ sarav
+ sarav
+ sarav
+ usaf
+ usaf
+ usaf
+ takur
+ takur
+ takur
+ jaideep
+(13 rows)
+
+pgdata=# SELECT INITCAP(ename) FROM emp;
+ initcap 
+---------
+ Jaideep
+ Jaideep
+ Jaideep
+ Sarav
+ Sarav
+ Sarav
+ Usaf
+ Usaf
+ Usaf
+ Takur
+ Takur
+ Takur
+ Jaideep
+(13 rows)
+
+pgdata=# SELECT *  FROM emp;
+ eid |  ename  | salary 
+-----+---------+--------
+ 104 | Jaideep |     10
+ 105 | Jaideep |     30
+ 106 | Jaideep |     20
+ 101 | SARAV   |     40
+ 102 | SARAV   |     50
+ 103 | SARAV   |     60
+ 107 | USAF    | 70.003
+ 108 | USAF    |      0
+ 109 | USAF    |    120
+ 110 | TAKUR   |    110
+ 111 | TAKUR   |    100
+ 112 | TAKUR   |     90
+ 113 | JAIDEEP |     80
+(13 rows)
+
+pgdata=# SELECT CONCAT(ename,salary) FROM emp;
+   concat   
+------------
+ Jaideep10
+ Jaideep30
+ Jaideep20
+ SARAV40
+ SARAV50
+ SARAV60
+ USAF70.003
+ USAF0
+ USAF120
+ TAKUR110
+ TAKUR100
+ TAKUR90
+ JAIDEEP80
+(13 rows)
+
+pgdata=# SELECT CONCAT(ename,' ',salary) FROM emp;
+   concat    
+-------------
+ Jaideep 10
+ Jaideep 30
+ Jaideep 20
+ SARAV 40
+ SARAV 50
+ SARAV 60
+ USAF 70.003
+ USAF 0
+ USAF 120
+ TAKUR 110
+ TAKUR 100
+ TAKUR 90
+ JAIDEEP 80
+(13 rows)
+
+pgdata=# SELECT CONCAT(eid,' ',ename,' ',salary) FROM emp;
+     concat      
+-----------------
+ 104 Jaideep 10
+ 105 Jaideep 30
+ 106 Jaideep 20
+ 101 SARAV 40
+ 102 SARAV 50
+ 103 SARAV 60
+ 107 USAF 70.003
+ 108 USAF 0
+ 109 USAF 120
+ 110 TAKUR 110
+ 111 TAKUR 100
+ 112 TAKUR 90
+ 113 JAIDEEP 80
+(13 rows)
+
+pgdata=# SELECT CONCAT(eid,' ',ename,'        ',salary) FROM emp;
+         concat         
+------------------------
+ 104 Jaideep        10
+ 105 Jaideep        30
+ 106 Jaideep        20
+ 101 SARAV        40
+ 102 SARAV        50
+ 103 SARAV        60
+ 107 USAF        70.003
+ 108 USAF        0
+ 109 USAF        120
+ 110 TAKUR        110
+ 111 TAKUR        100
+ 112 TAKUR        90
+ 113 JAIDEEP        80
+(13 rows)
+
+pgdata=# SELECT CONCAT(eid,' ',UPPER(ename),' ',salary) FROM emp;
+     concat      
+-----------------
+ 104 JAIDEEP 10
+ 105 JAIDEEP 30
+ 106 JAIDEEP 20
+ 101 SARAV 40
+ 102 SARAV 50
+ 103 SARAV 60
+ 107 USAF 70.003
+ 108 USAF 0
+ 109 USAF 120
+ 110 TAKUR 110
+ 111 TAKUR 100
+ 112 TAKUR 90
+ 113 JAIDEEP 80
+(13 rows)
+
+pgdata=# SELECT CONCAT(eid,' ',INITCAP(ename),' ',salary) FROM emp;
+     concat      
+-----------------
+ 104 Jaideep 10
+ 105 Jaideep 30
+ 106 Jaideep 20
+ 101 Sarav 40
+ 102 Sarav 50
+ 103 Sarav 60
+ 107 Usaf 70.003
+ 108 Usaf 0
+ 109 Usaf 120
+ 110 Takur 110
+ 111 Takur 100
+ 112 Takur 90
+ 113 Jaideep 80
+(13 rows)
+
+pgdata=# SELECT *  FROM emp;
+ eid |  ename  | salary 
+-----+---------+--------
+ 104 | Jaideep |     10
+ 105 | Jaideep |     30
+ 106 | Jaideep |     20
+ 101 | SARAV   |     40
+ 102 | SARAV   |     50
+ 103 | SARAV   |     60
+ 107 | USAF    | 70.003
+ 108 | USAF    |      0
+ 109 | USAF    |    120
+ 110 | TAKUR   |    110
+ 111 | TAKUR   |    100
+ 112 | TAKUR   |     90
+ 113 | JAIDEEP |     80
+(13 rows)
+
+pgdata=# SELECT CONCAT(eid,eid) FROM emp where salary=10 OR salary=20;
+ concat 
+--------
+ 104104
+ 106106
+(2 rows)
+
+pgdata=# SELECT CONCAT(eid,eid) FROM emp where salary=10 AND salary=20;
+ concat 
+--------
+(0 rows)
+
+pgdata=# SELECT CONCAT(eid) FROM emp where salary=10 or salary=20;
+ concat 
+--------
+ 104
+ 106
+(2 rows)
+
+pgdata=# SELECT SUM(salary) FROM emp WHERE ename='JAIDEEP';
+ sum 
+-----
+  80
+(1 row)
+
+pgdata=# SELECT COUNT(*) FROM emp;
+ count 
+-------
+    13
+(1 row)
+
+pgdata=# SELECT AVG(salary) FROM emp WHERE ename='JAIDEEP';
+ avg 
+-----
+  80
+(1 row)
+
+pgdata=# SELECT MAX(salary) FROM emp WHERE ename='JAIDEEP';
+ max 
+-----
+  80
+(1 row)
+
+pgdata=# SELECT MAX(salary) FROM emp WHERE ename='Jaideep';
+ max 
+-----
+  30
+(1 row)
+
+pgdata=# SELECT AVG(salary) FROM emp WHERE ename='Jaideep';
+ avg 
+-----
+  20
+(1 row)
+
+pgdata=# SELECT MIN(salary) FROM emp WHERE ename='Jaideep';
+ min 
+-----
+  10
+(1 row)
+
+pgdata=# SELECT *  FROM emp;
+ eid |  ename  | salary 
+-----+---------+--------
+ 104 | Jaideep |     10
+ 105 | Jaideep |     30
+ 106 | Jaideep |     20
+ 101 | SARAV   |     40
+ 102 | SARAV   |     50
+ 103 | SARAV   |     60
+ 107 | USAF    | 70.003
+ 108 | USAF    |      0
+ 109 | USAF    |    120
+ 110 | TAKUR   |    110
+ 111 | TAKUR   |    100
+ 112 | TAKUR   |     90
+ 113 | JAIDEEP |     80
+(13 rows)
+
+pgdata=# SELECT CONCAT(eid,eid) FROM emp where salary=10 OR salary=20;
+ concat 
+--------
+ 104104
+ 106106
+(2 rows)
+
+pgdata=# SELECT COUNT(eid), ename FROM emp GROUP BY ename;
+ count |  ename  
+-------+---------
+     1 | JAIDEEP
+     3 | USAF
+     3 | Jaideep
+     3 | TAKUR
+     3 | SARAV
+(5 rows)
+
+pgdata=# SELECT COUNT(salary), ename FROM emp GROUP BY ename;
+ count |  ename  
+-------+---------
+     1 | JAIDEEP
+     3 | USAF
+     3 | Jaideep
+     3 | TAKUR
+     3 | SARAV
+(5 rows)
+
+pgdata=# SELECT SUM(salary), ename FROM emp GROUP BY ename;
+    sum    |  ename  
+-----------+---------
+        80 | JAIDEEP
+ 190.00299 | USAF
+        60 | Jaideep
+       300 | TAKUR
+       150 | SARAV
+(5 rows)
+
+pgdata=# SELECT COUNT(eid), ename FROM emp GROUP BY ename;
+ count |  ename  
+-------+---------
+     1 | JAIDEEP
+     3 | USAF
+     3 | Jaideep
+     3 | TAKUR
+     3 | SARAV
+(5 rows)
+
+pgdata=# SELECT SUM(eid), ename FROM emp GROUP BY ename;
+ sum |  ename  
+-----+---------
+ 113 | JAIDEEP
+ 324 | USAF
+ 315 | Jaideep
+ 333 | TAKUR
+ 306 | SARAV
+(5 rows)
+
+pgdata=# SELECT *  FROM emp;
+ eid |  ename  | salary 
+-----+---------+--------
+ 104 | Jaideep |     10
+ 105 | Jaideep |     30
+ 106 | Jaideep |     20
+ 101 | SARAV   |     40
+ 102 | SARAV   |     50
+ 103 | SARAV   |     60
+ 107 | USAF    | 70.003
+ 108 | USAF    |      0
+ 109 | USAF    |    120
+ 110 | TAKUR   |    110
+ 111 | TAKUR   |    100
+ 112 | TAKUR   |     90
+ 113 | JAIDEEP |     80
+(13 rows)
+
+pgdata=# SELECT *  FROM emp;
+ eid |  ename  | salary 
+-----+---------+--------
+ 104 | Jaideep |     10
+ 105 | Jaideep |     30
+ 106 | Jaideep |     20
+ 101 | SARAV   |     40
+ 102 | SARAV   |     50
+ 103 | SARAV   |     60
+ 107 | USAF    | 70.003
+ 108 | USAF    |      0
+ 109 | USAF    |    120
+ 110 | TAKUR   |    110
+ 111 | TAKUR   |    100
+ 112 | TAKUR   |     90
+ 113 | JAIDEEP |     80
+(13 rows)
+
+pgdata=# SELECT *  FROM emp ORDER BY eid;
+ eid |  ename  | salary 
+-----+---------+--------
+ 101 | SARAV   |     40
+ 102 | SARAV   |     50
+ 103 | SARAV   |     60
+ 104 | Jaideep |     10
+ 105 | Jaideep |     30
+ 106 | Jaideep |     20
+ 107 | USAF    | 70.003
+ 108 | USAF    |      0
+ 109 | USAF    |    120
+ 110 | TAKUR   |    110
+ 111 | TAKUR   |    100
+ 112 | TAKUR   |     90
+ 113 | JAIDEEP |     80
+(13 rows)
+
+pgdata=# SELECT *  FROM emp ORDER BY eid;
+ eid |  ename  | salary 
+-----+---------+--------
+ 101 | SARAV   |     40
+ 102 | SARAV   |     50
+ 103 | SARAV   |     60
+ 104 | Jaideep |     10
+ 105 | Jaideep |     30
+ 106 | Jaideep |     20
+ 107 | USAF    | 70.003
+ 108 | USAF    |      0
+ 109 | USAF    |    120
+ 110 | TAKUR   |    110
+ 111 | TAKUR   |    100
+ 112 | TAKUR   |     90
+ 113 | JAIDEEP |     80
+(13 rows)
+
+pgdata=# SELECT *  FROM emp ORDER BY eid;
+ eid |  ename  | salary 
+-----+---------+--------
+ 101 | SARAV   |     40
+ 102 | SARAV   |     50
+ 103 | SARAV   |     60
+ 104 | Jaideep |     10
+ 105 | Jaideep |     30
+ 106 | Jaideep |     20
+ 107 | USAF    | 70.003
+ 108 | USAF    |      0
+ 109 | USAF    |    120
+ 110 | TAKUR   |    110
+ 111 | TAKUR   |    100
+ 112 | TAKUR   |     90
+ 113 | JAIDEEP |     80
+(13 rows)
+
+pgdata=# SELECT *  FROM emp ORDER BY ename;
+ eid |  ename  | salary 
+-----+---------+--------
+ 113 | JAIDEEP |     80
+ 105 | Jaideep |     30
+ 106 | Jaideep |     20
+ 104 | Jaideep |     10
+ 102 | SARAV   |     50
+ 103 | SARAV   |     60
+ 101 | SARAV   |     40
+ 110 | TAKUR   |    110
+ 111 | TAKUR   |    100
+ 112 | TAKUR   |     90
+ 108 | USAF    |      0
+ 109 | USAF    |    120
+ 107 | USAF    | 70.003
+(13 rows)
+
+pgdata=# SELECT *  FROM emp ORDER BY salary ;
+ eid |  ename  | salary 
+-----+---------+--------
+ 108 | USAF    |      0
+ 104 | Jaideep |     10
+ 106 | Jaideep |     20
+ 105 | Jaideep |     30
+ 101 | SARAV   |     40
+ 102 | SARAV   |     50
+ 103 | SARAV   |     60
+ 107 | USAF    | 70.003
+ 113 | JAIDEEP |     80
+ 112 | TAKUR   |     90
+ 111 | TAKUR   |    100
+ 110 | TAKUR   |    110
+ 109 | USAF    |    120
+(13 rows)
+
+pgdata=# SELECT *  FROM emp ORDER BY salary ASC;
+ eid |  ename  | salary 
+-----+---------+--------
+ 108 | USAF    |      0
+ 104 | Jaideep |     10
+ 106 | Jaideep |     20
+ 105 | Jaideep |     30
+ 101 | SARAV   |     40
+ 102 | SARAV   |     50
+ 103 | SARAV   |     60
+ 107 | USAF    | 70.003
+ 113 | JAIDEEP |     80
+ 112 | TAKUR   |     90
+ 111 | TAKUR   |    100
+ 110 | TAKUR   |    110
+ 109 | USAF    |    120
+(13 rows)
+
+pgdata=# SELECT *  FROM emp ORDER BY salary DESC;
+ eid |  ename  | salary 
+-----+---------+--------
+ 109 | USAF    |    120
+ 110 | TAKUR   |    110
+ 111 | TAKUR   |    100
+ 112 | TAKUR   |     90
+ 113 | JAIDEEP |     80
+ 107 | USAF    | 70.003
+ 103 | SARAV   |     60
+ 102 | SARAV   |     50
+ 101 | SARAV   |     40
+ 105 | Jaideep |     30
+ 106 | Jaideep |     20
+ 104 | Jaideep |     10
+ 108 | USAF    |      0
+(13 rows)
+
+pgdata=# SELECT eid,ename='Jaideep'  FROM emp ORDER BY eid DESC;
+ eid | ?column? 
+-----+----------
+ 113 | f
+ 112 | f
+ 111 | f
+ 110 | f
+ 109 | f
+ 108 | f
+ 107 | f
+ 106 | t
+ 105 | t
+ 104 | t
+ 103 | f
+ 102 | f
+ 101 | f
+(13 rows)
+
+pgdata=# SELECT eid,ename  FROM emp WHERE ename='Jaideep' ORDER BY eid DESC;
+ eid |  ename  
+-----+---------
+ 106 | Jaideep
+ 105 | Jaideep
+ 104 | Jaideep
+(3 rows)
+
+pgdata=# CREATE TABLE dept(did INT PRIMARY KEY NOT NULL, dname TEXT NOT NULL, fnum INT);
+CREATE TABLE
+pgdata=# INSERT INTO dept(did,dname,fnum) values(1,'Matchground',9),(2,'Practice ground',8),(3,'Meeting Area',5),(4,'Management',6);
+INSERT 0 4
+pgdata=# \l
+                                            List of databases
+   Name    |  Owner   | Encoding | Collate | Ctype | ICU Locale | Locale Provider |   Access privileges   
+-----------+----------+----------+---------+-------+------------+-----------------+-----------------------
+ pgdata    | postgres | UTF8     | C       | C     |            | libc            | 
+ postgres  | postgres | UTF8     | C       | C     |            | libc            | 
+ template0 | postgres | UTF8     | C       | C     |            | libc            | =c/postgres          +
+           |          |          |         |       |            |                 | postgres=CTc/postgres
+ template1 | postgres | UTF8     | C       | C     |            | libc            | =c/postgres          +
+           |          |          |         |       |            |                 | postgres=CTc/postgres
+(4 rows)
+
+pgdata=# SELECT * FROM dept
+pgdata-# ;
+ did |      dname      | fnum 
+-----+-----------------+------
+   1 | Matchground     |    9
+   2 | Practice ground |    8
+   3 | Meeting Area    |    5
+   4 | Management      |    6
+(4 rows)
+
+pgdata=# ALTER TABLE emp ADD did INT;
+ALTER TABLE
+
+pgdata=# ALTER TABLE emp ADD CONSTRAINT fk_emp_dept FOREIGN KEY(did) REFERENCES dept(did);
+ALTER TABLE
+
+pgdata=# SELECT * from dept;
+ did |      dname      | fnum 
+-----+-----------------+------
+   1 | Matchground     |    9
+   2 | Practice ground |    8
+   3 | Meeting Area    |    5
+   4 | Management      |    6
+(4 rows)
+
+pgdata=# SELECT * from emp;
+ eid |  ename  | salary | did 
+-----+---------+--------+-----
+ 104 | Jaideep |     10 |    
+ 105 | Jaideep |     30 |    
+ 106 | Jaideep |     20 |    
+ 101 | SARAV   |     40 |    
+ 102 | SARAV   |     50 |    
+ 103 | SARAV   |     60 |    
+ 107 | USAF    | 70.003 |    
+ 108 | USAF    |      0 |    
+ 109 | USAF    |    120 |    
+ 110 | TAKUR   |    110 |    
+ 111 | TAKUR   |    100 |    
+ 112 | TAKUR   |     90 |    
+ 113 | JAIDEEP |     80 |    
+(13 rows)
+
+pgdata=# INSERT INTO emp(eid,ename,salary,did) VALUES(0,0,0,1)
+pgdata-# ;
+INSERT 0 1
+
+pgdata=# SELECT * from emp;
+ eid |  ename  | salary | did 
+-----+---------+--------+-----
+ 104 | Jaideep |     10 |    
+ 105 | Jaideep |     30 |    
+ 106 | Jaideep |     20 |    
+ 101 | SARAV   |     40 |    
+ 102 | SARAV   |     50 |    
+ 103 | SARAV   |     60 |    
+ 107 | USAF    | 70.003 |    
+ 108 | USAF    |      0 |    
+ 109 | USAF    |    120 |    
+ 110 | TAKUR   |    110 |    
+ 111 | TAKUR   |    100 |    
+ 112 | TAKUR   |     90 |    
+ 113 | JAIDEEP |     80 |    
+   0 | 0       |      0 |   1
+(14 rows)
+
+pgdata=# DELETE FROM emp where eid=0;
+DELETE 1
+
+pgdata=# SELECT * from emp;
+ eid |  ename  | salary | did 
+-----+---------+--------+-----
+ 104 | Jaideep |     10 |    
+ 105 | Jaideep |     30 |    
+ 106 | Jaideep |     20 |    
+ 101 | SARAV   |     40 |    
+ 102 | SARAV   |     50 |    
+ 103 | SARAV   |     60 |    
+ 107 | USAF    | 70.003 |    
+ 108 | USAF    |      0 |    
+ 109 | USAF    |    120 |    
+ 110 | TAKUR   |    110 |    
+ 111 | TAKUR   |    100 |    
+ 112 | TAKUR   |     90 |    
+ 113 | JAIDEEP |     80 |    
+(13 rows)
+
+pgdata=# UPDATE emp set did=1 WHERE eid=101 OR eid=102 OR eid=103 OR eid=104 OR eid=105;
+UPDATE 5
+pgdata=# UPDATE emp set did=2 WHERE eid=105 OR eid=106 OR eid=107 OR eid=108;
+UPDATE 4
+pgdata=# UPDATE emp set did=3 WHERE eid=110 OR eid=109;
+UPDATE 2
+pgdata=# UPDATE emp set did=4 WHERE eid=111 OR eid=112 OR eid=113;
+UPDATE 3
+pgdata=# SELECT * from emp;
+ eid |  ename  | salary | did 
+-----+---------+--------+-----
+ 104 | Jaideep |     10 |   1
+ 101 | SARAV   |     40 |   1
+ 102 | SARAV   |     50 |   1
+ 103 | SARAV   |     60 |   1
+ 105 | Jaideep |     30 |   2
+ 106 | Jaideep |     20 |   2
+ 107 | USAF    | 70.003 |   2
+ 108 | USAF    |      0 |   2
+ 109 | USAF    |    120 |   3
+ 110 | TAKUR   |    110 |   3
+ 111 | TAKUR   |    100 |   4
+ 112 | TAKUR   |     90 |   4
+ 113 | JAIDEEP |     80 |   4
+(13 rows)
+
+pgdata=# UPDATE emp set did=4 WHERE did=5;
+UPDATE 0
+
+pgdata=# INSERT INTO dept values(5,'resturant',3);
+INSERT 0 1
+
+pgdata=# SELECT * from dept;
+ did |      dname      | fnum 
+-----+-----------------+------
+   1 | Matchground     |    9
+   2 | Practice ground |    8
+   3 | Meeting Area    |    5
+   4 | Management      |    6
+   5 | resturant       |    3
+(5 rows)
